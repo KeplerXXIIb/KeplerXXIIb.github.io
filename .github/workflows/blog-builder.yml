@@ -21,6 +21,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
+          submodules: false  # 禁用子模块的自动更新 
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
