@@ -1,0 +1,47 @@
+# Contributors: @MrWillCom , @aeilot
+# Created by Louis Aeilot on 2020/8/21. (GitHub: @aeilot)
+# Improved by Mr. Will on 2020/8/21. (GitHub: @MrWillCom)
+# Improved by KeplerXXIIb on 2024/6/11.(GitHub: @KeplerXXIIb)
+
+name: "Hexo Blog Builder"
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: "Hexo Blog Build"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Clone Submodule
+        run: git submodule init && git submodule update
+      - name: Install pnpm
+        run: npm i pnpm -g
+      - name: Install Dependencies
+        run: pnpm install
+      - name: Clean Previous Build
+        run: rm -rf docs
+      - name: Hexo Clean
+        run: pnpm run clean
+      - name: Generate New Build
+        run: pnpm run build
+      - name: Move docs/ to public/
+        run: mv public docs
+      - name: Publish
+        run: |
+          git config --global user.name "Hexo Deploy Bot"
+          git config --global user.email "nobody@nobody.nobody"
+          git add .
+          git commit -m "Hexo Blog Build"
+          git push
