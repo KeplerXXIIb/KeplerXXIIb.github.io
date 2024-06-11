@@ -1,0 +1,34 @@
+nav:
+  title: Blog
+  items:
+    Archives: /archives
+    Friends: /friends
+    Projects: /projects
+    About: /about
+    GitHub: https://github.com/KeplerXXIIb
+    CodePen: /codepan
+    Patreon: /patreon
+    Mastodon: /mastodon
+    Discord: /discord
+    Search: /search
+footer:
+  Projects:
+    C-Learning: https://github.com/KeplerXXIIb/CS-Learning
+  Me:
+    # items
+    GitHub: https://github.com/KeplerXXIIb
+    Email: QQ:936474910@qq.com
+
+# rainbow!
+rainbow_banner: true
+rainbow_banner_colors:
+  - '#e50000'
+  - '#ff8d00'
+  - '#ffee00'
+  - '#008121'
+  - '#004cff'
+  - '#760188'
+# choose from [auto, always]
+rainbow_banner_shown: auto
+# Pride Month by default
+rainbow_banner_month: 2

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>记有关Git的一次误操作及处理Something about Git. - KeplerXXIIb</title>
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="记有关Git的一次误操作及处理Something about Git. - KeplerXXIIb" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="http://example.com/2024/05/31/SomethingAboutGit/index.html" />
+  
+  <meta property="og:image" content="/imgs/20240606001.jpg" />
+  
+  <meta property="og:article:published_time" content="2024-05-30T16:00:00.000Z" />
+  
+  <meta property="og:article:author" content="KeplerXXIIb" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="2"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Blog</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">Friends</a>
+            
+            
+            
+            <a class="nav-item" href="/projects">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/KeplerXXIIb" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="/codepan" target="_blank" aria-label="CodePen">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="/patreon" target="_blank" aria-label="Patreon">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-mastodon nav-item-icon" href="/mastodon" target="_blank" aria-label="Mastodon">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="/discord" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/tech-blog/">tech-blog</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>May</span>
+            <span>31,</span>
+            <span>2024</span>
+        </div>
+        
+
+        <h1 class="title">记有关Git的一次误操作及处理Something about Git.</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <p>在使用VSC的过程中，发现了一个好用的git插件，GitLens。<br><img src="/imgs/20240605008.png"></p>
+<h2 id="事发经过"><a href="#事发经过" class="headerlink" title="事发经过"></a>事发经过</h2><p>5月26日晚10点40左右，手贱的我，不小心在GitLens的操作界面，点到了撤销stashes。我的C语言文档（网课课件、代码等）已经部署了Git托管，距离上一次commit（0521update），已经过了5天，已经积攒了较多改动。我的这个操作直接将文档还原到了“0521update”后的状态。我慌了，虽然这部分改动我都可以凭记忆还原，但是有些麻烦，况且以后如果遇到类似问题，提交了n多次的项目文档怎么能经得起这种折腾？<br>于是乎，马上开始搜索相关方案抢救。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>通过“用户文档+用搜索引擎搜索经验贴+LLM大模型搜索”方式搜索方法后，<br>综合了下，大致思路是通过日志等找到stash记录然后将其恢复（直接恢复或单独生成一个分支）。<br>尝试了以下语句：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br><span class="line">git reflog</span><br><span class="line">git fsck --no-reflogawk <span class="string">&#x27;/dangling commit/ &#123;print $3&#125;&#x27;</span></span><br><span class="line">git show &lt;commit-hash&gt;</span><br><span class="line">git cherry pick</span><br><span class="line">git reset --hard &lt;<span class="built_in">hash</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>以上语句的用法及例子如下：（来源：文心大模型）</p>
+<hr>
+<h4 id="git-flog"><a href="#git-flog" class="headerlink" title="git flog"></a><code>git flog</code></h4><p><code>git log</code> 命令用于显示提交历史。默认情况下，它会显示最近的提交，包括提交信息、作者和提交者、提交时间等。</p>
+<p><strong>例子</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span></span><br><span class="line">commit 1a2b3c4d5e6f7890abcd1234567890ef1a2b3c4d</span><br><span class="line">Author: John Doe &lt;john.doe@example.com&gt;</span><br><span class="line">Date:   Mon Mar 1 21:39:13 2023 +0100</span><br><span class="line"></span><br><span class="line">    Initial commit</span><br><span class="line"></span><br><span class="line">commit 0123456789abcdef0123456789abcdef01234567</span><br><span class="line">Author: Jane Smith &lt;jane.smith@example.com&gt;</span><br><span class="line">Date:   Sun Feb 28 20:38:12 2023 +0100</span><br><span class="line"></span><br><span class="line">    Add a new feature</span><br></pre></td></tr></table></figure>
+
+<h4 id="git-reflog"><a href="#git-reflog" class="headerlink" title="git reflog"></a><code>git reflog</code></h4><p><code>git reflog</code> 命令用于显示引用日志。这个日志记录了 HEAD 和其他引用（如分支和标签）的最近更改。这对于恢复丢失的提交或回退到以前的版本特别有用。</p>
+<p><strong>例子</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git reflog</span><br><span class="line">1a2b3c4d HEAD@&#123;0&#125;: commit: Initial commit</span><br><span class="line">0123456 HEAD@&#123;1&#125;: reset: moving to HEAD~1</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h4 id="git-fsck"><a href="#git-fsck" class="headerlink" title="git fsck"></a><code>git fsck</code></h4><p><code>git fsck</code> 是一个用于检查 Git 仓库完整性的工具。它检查仓库中的对象是否损坏或缺失。</p>
+<p>或者更详细地检查：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fsck --full</span><br></pre></td></tr></table></figure>
+<p><strong>例子</strong>：</p>
+<p>如果运行 <code>git fsck</code> 并发现没有输出，那么你的仓库是健康的。如果有输出，则可能表示有损坏或丢失的对象。</p>
+<h4 id="git-fsck-no-reflogs-awk-dangling-commit-print-3"><a href="#git-fsck-no-reflogs-awk-dangling-commit-print-3" class="headerlink" title="git fsck --no-reflogs | awk &#39;/dangling commit/ {print $3}&#39;"></a><code>git fsck --no-reflogs | awk &#39;/dangling commit/ &#123;print $3&#125;&#39;</code></h4><p>这个命令组合用于查找并列出仓库中未引用的提交（通常称为“悬挂”提交）。<code>--no-reflogs</code> 选项告诉 <code>git fsck</code> 不要检查引用日志。然后，通过 <code>awk</code> 命令过滤出与“dangling commit”相关的行，并打印出这些提交的哈希值。</p>
+<p><strong>例子</strong>：</p>
+<p>假设你运行了这个命令并得到了以下输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d098765</span><br><span class="line">e0f1234</span><br></pre></td></tr></table></figure>
+<p>这表示你有两个悬挂的提交，其哈希值分别为 <code>d098765</code> 和 <code>e0f1234</code>。</p>
+<h4 id="git-show"><a href="#git-show" class="headerlink" title="git show &lt;commit-hash&gt;"></a><code>git show &lt;commit-hash&gt;</code></h4><p><code>git show</code> 命令用于显示指定提交的详细信息，包括提交信息、作者和提交者、差异等。</p>
+<p><strong>例子</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ git show 1a2b3c4d5e6f7890abcd1234567890ef1a2b3c4d</span><br><span class="line">commit 1a2b3c4d5e6f7890abcd1234567890ef1a2b3c4d</span><br><span class="line">Author: John Doe &lt;john.doe@example.com&gt;</span><br><span class="line">Date:   Mon Mar 1 21:39:13 2023 +0100</span><br><span class="line"></span><br><span class="line">    Initial commit</span><br><span class="line"></span><br><span class="line">diff --git a/README.md b/README.md</span><br><span class="line">new file mode 100644</span><br><span class="line">index 0000000..e69de29</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，<code>git show</code> 显示了与提交哈希 <code>1a2b3c4d5e6f7890abcd1234567890ef1a2b3c4d</code> 相关的详细信息。</p>
+<h4 id="git-cherry-pick"><a href="#git-cherry-pick" class="headerlink" title="git cherry-pick &lt;commit hash&gt;"></a><code>git cherry-pick &lt;commit hash&gt;</code></h4><p>在 Git 中，<code>cherry-pick</code> 是一个用于选择某个或某些提交（commit）并应用它们到当前分支的操作，而无需合并（merge）或变基（rebase）整个分支。这在你想要获取某个分支上的特定更改，但不想引入该分支上的其他更改时非常有用。</p>
+<p>以下是 <code>cherry-pick</code> 的基本用法：</p>
+<ol>
+<li><strong>查看提交历史</strong>：<br>首先，你需要知道你想要 <code>cherry-pick</code> 的提交的哈希值（commit hash）。你可以使用 <code>git log</code> 命令来查看提交历史。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+<p>这将显示提交列表，每个提交都有一个唯一的哈希值。<br>2. <strong>执行 cherry-pick</strong>：<br>使用 <code>git cherry-pick &lt;commit-hash&gt;</code> 命令来应用特定的提交。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git cherry-pick abcdef123456</span><br></pre></td></tr></table></figure>
+<p>在上面的命令中，<code>abcdef123456</code> 是你想要 <code>cherry-pick</code> 的提交的哈希值。<br>3. <strong>解决冲突</strong>：<br>如果 <code>cherry-pick</code> 的提交与当前分支上的更改存在冲突，Git 会提示你解决这些冲突。你需要手动编辑文件以解决冲突，然后使用 <code>git add</code> 命令来标记冲突已解决，并使用 <code>git commit</code> 来完成 <code>cherry-pick</code> 操作。</p>
+<p>注意：默认情况下，<code>cherry-pick</code> 会创建一个新的提交，即使你正在 <code>cherry-pick</code> 的提交在原始分支上是一个合并提交（merge commit）。如果你想要保持合并提交的结构，你需要使用其他更复杂的工具或方法。<br>4. <strong>撤销 cherry-pick</strong>：<br>如果你不小心 <code>cherry-pick</code> 了错误的提交，并且想要撤销它，你可以使用 <code>git reset</code> 命令。但请注意，这会撤销最后一次 <code>cherry-pick</code> 提交以及该提交之后的所有提交。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^</span><br></pre></td></tr></table></figure>
+<p>或者，如果你只想撤销最后一次 <code>cherry-pick</code>，但保留之后的提交，你可以使用 <code>git revert</code> 命令来创建一个新的提交，该提交会撤销 <code>cherry-pick</code> 提交所做的更改。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert HEAD</span><br></pre></td></tr></table></figure>
+<p>这将创建一个新的提交，该提交是 <code>cherry-pick</code> 提交的逆操作。</p>
+<h4 id="git-reset-hard"><a href="#git-reset-hard" class="headerlink" title="git reset --hard &lt;hash&gt;"></a><code>git reset --hard &lt;hash&gt;</code></h4><p>在 Git 中，<code>git reset --hard &lt;hash&gt;</code> 是一个强大的命令，用于将当前分支的 HEAD 移动到指定的提交（由 <code>&lt;hash&gt;</code> 标识），并且重置索引（staging area）和工作目录（working directory）以匹配该提交的内容。这意味着所有在当前 HEAD 之后（不包括该提交）的更改都会被丢弃。</p>
+<p>使用 <code>git reset --hard</code> 时需要特别小心，因为它会丢弃所有未提交的更改。这些更改包括暂存的（staged）更改和未暂存的（unstaged）更改。</p>
+<p>以下是一些关于 <code>git reset --hard &lt;hash&gt;</code> 的重要事项：</p>
+<ol>
+<li><p><strong>不可逆</strong>：一旦执行了 <code>git reset --hard</code>，所有被丢弃的更改都将无法恢复（除非你之前有备份或者通过其他分支&#x2F;reflogs 能够找到它们）。</p>
+</li>
+<li><p><strong>指定提交</strong>：<code>&lt;hash&gt;</code> 是你想要重置到的提交的哈希值或引用（如 <code>HEAD~2</code> 表示前两个提交）。</p>
+</li>
+<li><p><strong>工作目录和索引的变化</strong>：执行命令后，你的工作目录和索引将被更新以匹配指定提交的内容。任何暂存的或未暂存的更改都将被丢弃。</p>
+</li>
+<li><p><strong>HEAD 的移动</strong>：HEAD 指针会移动到指定的提交，成为新的当前提交。</p>
+</li>
+<li><p><strong>不创建新的提交</strong>：与 <code>git revert</code> 不同，<code>git reset --hard</code> 不会创建新的提交来撤销之前的更改；它仅仅是简单地丢弃它们。</p>
+</li>
+<li><p><strong>用途</strong>：这个命令通常用于以下情况：</p>
+<ul>
+<li>当你想要完全撤销一系列提交时。</li>
+<li>当你想要将分支重置到一个干净的状态，以便重新开始。</li>
+<li>当你确信不再需要某个分支上的某些更改时。</li>
+</ul>
+</li>
+<li><p><strong>谨慎使用</strong>：在公共分支上使用此命令时要格外小心，因为这会导致其他人尝试拉取或推送更改时遇到问题。通常，最好在本地分支或私有分支上使用它。</p>
+</li>
+<li><p><strong>Reflog</strong>：Git 的 reflog 可以作为一种“后悔药”，因为它记录了 HEAD 的所有移动。即使你使用 <code>git reset --hard</code> 丢弃了更改，你也可以通过 reflog 找到它们并恢复。但是，这并不意味着你应该依赖 reflog 来避免丢失数据；始终确保你有适当的备份和版本控制策略。</p>
+</li>
+</ol>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 假设你想要将当前分支重置到前两个提交</span></span><br><span class="line">git reset --hard HEAD~2</span><br></pre></td></tr></table></figure>
+
+<p>这个命令会丢弃当前 HEAD 和其前一个提交的所有更改，并将 HEAD 移动到前两个提交。</p>
+<hr>
+<h2 id="过程截图"><a href="#过程截图" class="headerlink" title="过程截图"></a>过程截图</h2><p>git log发现log显示的最近一次更新是0521update。<br><img src="/imgs/20240605001.png"></p>
+<p>git relog发现log显示的最近一次更新是0521update。<br><img src="/imgs/20240605002.png"></p>
+<p>通过git fsck发现了悬挂着的commit的哈希值<br><img src="/imgs/20240605003.png"></p>
+<p>通过git fsck –no-reflogs | awk ‘&#x2F;dangling commit&#x2F; {print $3}’确认有两条悬挂着的commit。<br>使用git show <commit-hash>查看两次提交的具体内容。<br><img src="/imgs/20240605004.png"><br>由于这个dangling commit是单独的commit，不需要其历史记录，所以使用cherry pick单独挑出，<br><img src="/imgs/20240605005.png"></p>
+<p>这里其实不需要再切换了，不过当时看到了这个命令，而且0526update后文档没有什么变动，所以怀着好奇心的我还是操作了git reset –hard <hash>。<br>于是乎分支重新定位到了这个提交。<br><img src="/imgs/20240605006.png"><br>此时再去查看dangling commit发现该提交已不存在。<br><img src="/imgs/20240605007.png"></p>
+<p>就是GitLens让我瞎操作出了这次幺蛾子（狗头。再次评估自己的需求后，发现自己就是想看下分支图，所以卸载了GitLens（主要是它pro版还要收费），安装了GitGraph。<br><img src="/imgs/20240605008.png"></p>
+<p>cherrypick前，在此之前需将分支切换回main（原主分支）。<br><img src="/imgs/20240605009.png"></p>
+<p>cherrypick后，0531update是后来的更新，和这次操作无关。<br><img src="/imgs/20240605010.png"></p>
+<p>最终将这次提交合并到了原分支上。问题解决。</p>
+
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by KeplerXXIIb, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/CS/" class="tag">#CS</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        <a class="next"></a>
+        
+        <a href="/2024/05/07/I%E2%80%98mTheOnlyOne/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">独一无二的我！I&#39;m the only one.</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Blog</h2>
+                
+                <a href="/" class="item">Blog</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+                <a href="/search" class="item">Search</a>
+                
+                <a href="/friends" class="item">Friends</a>
+                
+                <a href="/projects" class="item">Projects</a>
+                
+                <a href="/resume" class="item">Resume</a>
+                
+                <a href="/about" class="item">About</a>
+                
+                <a href="/atom.xml" class="item">RSS</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Projects</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/KeplerXXIIb/CS-Learning" class="item">C-Learning</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/KeplerXXIIb" class="item">GitHub</a>
+                
+                <a href="QQ:936474910@qq.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 KeplerXXIIb<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>
