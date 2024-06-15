@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>记一次对个人博客部署(主题+素材部署）的优化Optimization Of Blog Deployment - KeplerXXIIb</title>
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="记一次对个人博客部署(主题+素材部署）的优化Optimization Of Blog Deployment - KeplerXXIIb" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="http://example.com/2024/06/11/OptimizationOfBlogDeployment/index.html" />
+  
+  <meta property="og:image" content="/imgs/20240615000.png" />
+  
+  <meta property="og:article:published_time" content="2024-06-11T00:00:00.000Z" />
+  
+  <meta property="og:article:author" content="KeplerXXIIb" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="2"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Blog</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">Friends</a>
+            
+            
+            
+            <a class="nav-item" href="/projects">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/KeplerXXIIb" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="/codepan" target="_blank" aria-label="CodePen">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="/patreon" target="_blank" aria-label="Patreon">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-mastodon nav-item-icon" href="/mastodon" target="_blank" aria-label="Mastodon">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="/discord" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/tech-blog/">tech-blog</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>June</span>
+            <span>11,</span>
+            <span>2024</span>
+        </div>
+        
+
+        <h1 class="title">记一次对个人博客部署(主题+素材部署）的优化Optimization Of Blog Deployment</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>我的个人博客已经搭建好了，详情见<a target="_blank" rel="noopener" href="https://keplerxxiib.github.io/2024/05/05/myfirstblog">我的第一篇博文</a>（写了搭博客的方法及过程嘿嘿）.<br>整体博客的主题我发现了相当酷炫的<a target="_blank" rel="noopener" href="https://github.com/MrWillCom/hexo-theme-cupertino">hexo-theme-cupertino</a>，在此基础上小小DIY了一下。<br>在写博文的过程中我发现个问题：图片素材的管理有点麻烦。<br>我的原始方案：素材单独放一个库，然后去引用。考虑到只是个人博客，且图片量不大，所以直接选了github来托管。然而在实操过程中我发现，每次写文章，上传图片很麻烦，要单独去管理。于是乎，打算优化一下。<br>如果换成其他的图库，问题仍然存在，因为依然要去维护，所以我选择将图片放本地。<br>偶然间发现我所用主题的作者也用这个方式部署了博客<a target="_blank" rel="noopener" href="https://blog.mrwillcom.com/">Mrwill’sblog</a>，见贤思齐，所以我打开他的github“学习”了一手（狗头，哈哈。</p>
+<h2 id="详细过程"><a href="#详细过程" class="headerlink" title="详细过程"></a>详细过程</h2><h3 id="Hexo主题DIY"><a href="#Hexo主题DIY" class="headerlink" title="Hexo主题DIY"></a>Hexo主题DIY</h3><p>在hexo主题网站找到了这个炫酷的主题<a target="_blank" rel="noopener" href="https://github.com/MrWillCom/hexo-theme-cupertino">hexo-theme-cupertino</a>。<br><img src="/imgs/20240615010.png" title="hexo-theme-cupertino"><br>主题的配置指南为<a target="_blank" rel="noopener" href="https://cupertino.mrwillcom.com/configuration/navigation">cupertino-configuration</a>。最后，我的配置文件”_config.cupertino.yml”内容如图。<br><img src="/imgs/20240615011.png" title="cupertino-configuration"><br><img src="/imgs/20240615009.png" title="_config.cupertino.yml"><br>将独特的“彩虹月份”改到了我生日所在的2月，嘿嘿。</p>
+<h3 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h3><h4 id="图片素材管理原方案"><a href="#图片素材管理原方案" class="headerlink" title="图片素材管理原方案"></a>图片素材管理原方案</h4><p>刚开始写博客时，我的图片素材管理方案是，将图片上传到某个线上库，然后直接在博文中通过链接引用。由于钱包空空，而且博客也是通过GitHub部署，所以我选择了Github新建个repository来放图片素材。<br>新建的repo，写文时已经被有强迫症的我删除了哈哈</p>
+<p><img src="/imgs/20240615001.png" title="图片素材repo删除记录"></p>
+<h4 id="一些建议"><a href="#一些建议" class="headerlink" title="一些建议"></a>一些建议</h4><blockquote>
+<p>对GitHub的访问，懂的都懂，要靠运气，要想稳定访问，还是需要施展一些小魔法。不过由于本身博客就是用GitHub搭的，怎么都得访问GitHub，所以直接用GitHub来放图片素材也行，如果用其他平台部署，然后又有类似的图片素材管理需求的话，可以考虑其他的方式：譬如Gitee，或者其他一些偏向图片管理的云服务，譬如百度云、腾讯云等等。</p>
+</blockquote>
+<h4 id="问题点"><a href="#问题点" class="headerlink" title="问题点"></a>问题点</h4><p>在此方案下我遇到的问题：</p>
+<ol>
+<li>图片素材没存在hexo项目本地文件夹下，得单独用一个文件夹放，不方便一起管理。<br>注：刚开始时我试了将图片素材文件夹放hexo项目文件夹下，因为是两个repo，所以不能放一起，除非用子模块（Git Submodule），我没想维护那么复杂就直接分开了。</li>
+<li>图片素材是单独开了一个repo，感觉有点浪费repo的资源，因为该repo下只有图片。</li>
+<li>每次发文，push完文章后还要单独push一次图片，浪费时间。</li>
+<li>如果图片没有在写文章之前上传到图库，写作时没法预览。</li>
+</ol>
+<h3 id="见贤思齐"><a href="#见贤思齐" class="headerlink" title="见贤思齐"></a>见贤思齐</h3><p>在我苦恼怎么改进之时，突然想起我所用hexo主题的作者，也部署了这个博客，所以我打开了<a target="_blank" rel="noopener" href="https://blog.mrwillcom.com/">Mrwill’sblog</a>，然后顺着打开了他GitHub中部署博客的repo<a target="_blank" rel="noopener" href="https://github.com/MrWillCom/MrWillCom.github.io">Mrwill’s”BlogRepo”</a>。<br>哇，怎么和我的大不一样！<br>我发现这位大佬将hexo项目文件（包含图片素材）都传到了GitHub，而且他的推送是<br>通过机器人完成的，瞬间觉得非常6啊。</p>
+<h4 id="大佬的repo"><a href="#大佬的repo" class="headerlink" title="大佬的repo"></a>大佬的repo</h4><p><img src="/imgs/20240615002.png" title="大佬的repo截图"><br><img src="/imgs/20240615003.png" title="大佬的repo截图"></p>
+<p>反观我的，hexo项目文件仍在本地，用的是hexo-git-deploy插件，传到GitHub的只有生成的静态网页文件，而且图片还要单独放其他地方，这差距太大了！</p>
+<p>痛定思痛，马上改！</p>
+<h4 id="优化的点"><a href="#优化的点" class="headerlink" title="优化的点"></a>优化的点</h4><ol>
+<li>图片素材存放地址</li>
+</ol>
+<ul>
+<li>备份了图片</li>
+<li>删除了原来单独放图片的repo</li>
+<li>在hexo项目文件夹source里新建了存放图片的”imgs”文件夹</li>
+<li>博客文章中对图片的引用链接修改<br><img src="/imgs/20240615006.png"></li>
+</ul>
+<ol start="2">
+<li>将hexo项目文件上传至GitHub，hexo项目文件夹作出相应修改</li>
+</ol>
+<ul>
+<li><p>取消使用hexo的deploy插件，删除hexo项目文件中的.deploy文件夹。<br>本来想展示repo在此之前的历史提交的，不过我发现我用的是强制提交（因为文件绝大部分都不一样所以用了强制提交），所以把之前的提交历史顶掉了。这里其实操作失误了，应该提交为另一个分支，或者删除的时候不删.git，推送上去就好了，害，以后注意！。这里就展示下我回收站里的.delpoy文件夹吧哈哈哈。<br><img src="/imgs/20240615004.png" title="躺在回收站里的.deploy"></p>
+</li>
+<li><p>了解GitHubPages的作用原理<a target="_blank" rel="noopener" href="https://docs.github.com/zh/pages">GithubPagesDocs</a><br>之前用hexo-git-deploy插件，它是生成.deploy文件夹，把public文件夹下的内容copy到了.deploy下，然后传到了GitHub。GitHubPages的原理是找到名为“用户名.github.io”的repo下的指定文件夹，默认为&#x2F;root，可设置&#x2F;docs。</p>
+</li>
+<li><p>这里我遵循了<a target="_blank" rel="noopener" href="https://github.com/MrWillCom/MrWillCom.github.io">Mrwill’s”BlogRepo”</a>的设计，使用&#x2F;docs。<br><img src="/imgs/20240615005.png" title="GitHubPages设置详情"></p>
+</li>
+</ul>
+<ol start="3">
+<li>使用Github Actions配置push后自动部署<br>  使用hexo g生成新的静态网页页面时，会将生成的文件放到public文件夹下，而2中GitHubPages配置的是找&#x2F;docs，所以这里还需要处理，不然每次push要自己手动新建docs文件夹并复制内容进去。正好将这个动作写到GitHub Actions中。</li>
+</ol>
+<ul>
+<li>在hexo项目文件夹下新建.github&#x2F;workflows&#x2F;blog-builder.yml，配置内容如图所示：</li>
+<li>启动Ubuntu-&gt;</li>
+<li>拉取更新-&gt;</li>
+<li>安装依赖-&gt;</li>
+<li>新建docs，复制public中的内容到docs（本地.gitignore添加了”&#x2F;public”）-&gt;</li>
+<li>push更新到远程仓库<br><img src="/imgs/20240615007.png" title="blog-builder.yml"><br><img src="/imgs/20240615008.png" title="blog-builder.yml"></li>
+</ul>
+<p>注：在GitHub Actions中配置git执行语句，会有个问题：会触发两次aciton。<br>因为动作的触发条件设置为push，配置文件中，有两次push，一次是手工push的时候，一次是触发后执行的“git push”语句。这导致每次我push都会有两次action触发，然后有一个被强行暂停，然后我就会收到提醒邮件。我看了大佬也是一样的有报错。<br>官方说不推荐在配置文件里写git语句，而是推荐了内置的“deploy”指令.<br><img src="/imgs/20240615013.png" title="blog-builder.yml"></p>
+<p>这里因为我要从public复制内容到docs，要push，所以没再尝试使用官方的指令了，而是选择关掉了报错提醒哈哈哈。<br><img src="/imgs/20240615012.png"><br>后续可以再看下如何优化，省得每次push，Github Action都要报错。</p>
+
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by KeplerXXIIb, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/CS/" class="tag">#CS</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        <a class="next"></a>
+        
+        <a href="/2024/05/31/SomethingAboutGit/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">记有关Git的一次误操作及处理Something about Git.</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Blog</h2>
+                
+                <a href="/" class="item">Blog</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+                <a href="/search" class="item">Search</a>
+                
+                <a href="/friends" class="item">Friends</a>
+                
+                <a href="/projects" class="item">Projects</a>
+                
+                <a href="/resume" class="item">Resume</a>
+                
+                <a href="/about" class="item">About</a>
+                
+                <a href="/atom.xml" class="item">RSS</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Projects</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/KeplerXXIIb/CS-Learning" class="item">C-Learning</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/KeplerXXIIb" class="item">GitHub</a>
+                
+                <a href="QQ:936474910@qq.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 KeplerXXIIb<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>
