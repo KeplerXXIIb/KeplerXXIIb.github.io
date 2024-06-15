@@ -25,8 +25,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      # - name: Clone Submodule
-      #   run: git submodule init && git submodule update
       - name: Install pnpm
         run: npm i pnpm -g
       - name: Install Dependencies
@@ -39,6 +37,7 @@ jobs:
         run: pnpm run build
       - name: Move docs/ to public/
         run: mv public docs
+
       - name: Publish
         run: |
           git config --global user.name "Hexo Deploy Bot"
@@ -46,3 +45,12 @@ jobs:
           git add .
           git commit -m "Hexo Blog Build"
           git push
+
+      # - name: Deploy  
+      #   uses: JamesIves/github-pages-deploy-action@v4.3.3  
+      #   with:  
+      #     branch: main # 部署到的分支，通常是gh-pages  
+      #     folder: docs   # 要部署的文件夹  
+      #     clean: true      # 在部署之前清理目标分支  
+      #     commit-message: "Hexo Blog Build"  
+      #     # 如果需要，您还可以设置GITHUB_TOKEN等环境变量
