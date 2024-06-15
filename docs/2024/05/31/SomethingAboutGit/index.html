@@ -173,7 +173,7 @@
 
     <div class="content">
         <p>在使用VSC的过程中，发现了一个好用的git插件，GitLens。<br><img src="/imgs/20240605008.png"></p>
-<h2 id="事发经过"><a href="#事发经过" class="headerlink" title="事发经过"></a>事发经过</h2><p>2024年5月26日晚10点40左右，手贱的我，不小心在GitLens的操作界面，点到了撤销stashes。我的C语言文档（网课课件、代码等）已经部署了Git托管，距离上一次commit（0521update），已经过了5天，已经积攒了较多改动。我的这个操作直接将文档还原到了“0521update”后的状态。我慌了，虽然这部分改动我都可以凭记忆还原，但是有些麻烦，况且以后如果遇到类似问题，提交了n多次的项目文档怎么能经得起这种折腾？<br>于是乎，马上开始搜索相关方案抢救。</p>
+<h2 id="事发经过"><a href="#事发经过" class="headerlink" title="事发经过"></a>事发经过</h2><p>2024年5月26日晚10点40左右，手贱的我，不小心在GitLens的操作界面，点到了撤销stashes。我的C语言文档（网课课件、代码等）已经部署了Git托管，距离上一次commit（0521update），已经过了5天，已经积攒了较多改动。我的这个操作直接将文档还原到了“0521update”后的状态。我慌了，虽然这部分改动我都可以凭记忆还原，但是有些麻烦，况且以后如果遇到类似问题，提交了n多次的项目文档怎么能经得起这种折腾？<br>于是乎，马上开始搜索相关方案抢救！</p>
 <h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>通过“用户文档+用搜索引擎搜索经验贴+LLM大模型搜索”方式搜索方法后，<br>综合了下，大致思路是通过日志等找到stash记录然后将其恢复（直接恢复或单独生成一个分支）。<br>尝试了以下语句：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br><span class="line">git reflog</span><br><span class="line">git fsck --no-reflogawk <span class="string">&#x27;/dangling commit/ &#123;print $3&#125;&#x27;</span></span><br><span class="line">git show &lt;commit-hash&gt;</span><br><span class="line">git cherry pick</span><br><span class="line">git reset --hard &lt;<span class="built_in">hash</span>&gt;</span><br></pre></td></tr></table></figure>
 <p>以上语句的用法及例子如下：（来源：文心大模型）</p>
