@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   
-  <title>记一次对个人博客部署(主题+素材部署）的优化Optimization Of Blog Deployment - KeplerXXIIb</title>
+  <title>记一次对个人博客(主题+素材部署）的优化Optimization Of Blog Deployment - KeplerXXIIb</title>
   
     <link rel="shortcut icon" href="/favicon.png">
   
@@ -16,7 +16,7 @@
   
   
   
-  <meta property="og:title" content="记一次对个人博客部署(主题+素材部署）的优化Optimization Of Blog Deployment - KeplerXXIIb" />
+  <meta property="og:title" content="记一次对个人博客(主题+素材部署）的优化Optimization Of Blog Deployment - KeplerXXIIb" />
   
   <meta property="og:type" content="article" />
   
@@ -166,13 +166,31 @@
         </div>
         
 
-        <h1 class="title">记一次对个人博客部署(主题+素材部署）的优化Optimization Of Blog Deployment</h1>
+        <h1 class="title">记一次对个人博客(主题+素材部署）的优化Optimization Of Blog Deployment</h1>
     </div>
 
     <div class="divider"></div>
 
     <div class="content">
-        <h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>我的个人博客已经搭建好了，详情见<a target="_blank" rel="noopener" href="https://keplerxxiib.github.io/2024/05/05/myfirstblog">我的第一篇博文</a>（写了搭博客的方法及过程嘿嘿）.<br>整体博客的主题我发现了相当酷炫的<a target="_blank" rel="noopener" href="https://github.com/MrWillCom/hexo-theme-cupertino">hexo-theme-cupertino</a>，在此基础上小小DIY了一下。<br>在写博文的过程中我发现个问题：图片素材的管理有点麻烦。<br>我的原始方案：素材单独放一个库，然后去引用。考虑到只是个人博客，且图片量不大，所以直接选了github来托管。然而在实操过程中我发现，每次写文章，上传图片很麻烦，要单独去管理。于是乎，打算优化一下。<br>如果换成其他的图库，问题仍然存在，因为依然要去维护，所以我选择将图片放本地。<br>偶然间发现我所用主题的作者也用这个方式部署了博客<a target="_blank" rel="noopener" href="https://blog.mrwillcom.com/">Mrwill’sblog</a>，见贤思齐，所以我打开他的github“学习”了一手🤪，哈哈。</p>
+        <ul>
+<li><a href="#%E7%AE%80%E8%BF%B0">简述</a></li>
+<li><a href="#%E8%AF%A6%E7%BB%86%E8%BF%87%E7%A8%8B">详细过程</a><ul>
+<li><a href="#hexo%E4%B8%BB%E9%A2%98diy">Hexo主题DIY</a></li>
+<li><a href="#%E5%8F%91%E7%8E%B0%E9%97%AE%E9%A2%98">发现问题</a><ul>
+<li><a href="#%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90%E7%AE%A1%E7%90%86%E5%8E%9F%E6%96%B9%E6%A1%88">图片素材管理原方案</a></li>
+<li><a href="#%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE">一些建议</a></li>
+<li><a href="#%E9%97%AE%E9%A2%98%E7%82%B9">问题点</a></li>
+</ul>
+</li>
+<li><a href="#%E8%A7%81%E8%B4%A4%E6%80%9D%E9%BD%90">见贤思齐</a><ul>
+<li><a href="#%E5%A4%A7%E4%BD%AC%E7%9A%84repo">大佬的repo</a></li>
+<li><a href="#%E4%BC%98%E5%8C%96%E7%9A%84%E7%82%B9">优化的点</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>我的个人博客已经搭建好了，详情见<a target="_blank" rel="noopener" href="https://keplerxxiib.github.io/2024/05/05/myfirstblog">我的第一篇博文</a>（写了搭博客的方法及过程嘿嘿）.<br>整体博客的主题我发现了相当酷炫的<a target="_blank" rel="noopener" href="https://github.com/MrWillCom/hexo-theme-cupertino">hexo-theme-cupertino</a>，在此基础上小小DIY了一下。<br>在写博文的过程中我发现个问题：图片素材的管理有点麻烦。<br>我的原始方案：素材单独放一个库，然后去引用。考虑到只是个人博客，且图片量不大，所以直接选了github来托管。然而在实操过程中我发现，每次写文章，上传图片很麻烦，要单独去管理。于是乎，打算优化一下。<br>如果换成其他的图库，问题仍然存在，因为依然要去维护，所以我选择将图片放本地。<br>偶然间发现我所用主题的作者也用这个方式部署了博客<a target="_blank" rel="noopener" href="https://blog.mrwillcom.com/">Mrwill’sblog</a>，见贤思齐，所以我打开他的github“学习”了一手🤪，哈哈。</p>
 <h2 id="详细过程"><a href="#详细过程" class="headerlink" title="详细过程"></a>详细过程</h2><h3 id="Hexo主题DIY"><a href="#Hexo主题DIY" class="headerlink" title="Hexo主题DIY"></a>Hexo主题DIY</h3><p>在hexo主题网站找到了这个炫酷的主题<a target="_blank" rel="noopener" href="https://github.com/MrWillCom/hexo-theme-cupertino">hexo-theme-cupertino</a>。<br><img src="/imgs/20240615010.png" title="hexo-theme-cupertino"><br>主题的配置指南为<a target="_blank" rel="noopener" href="https://cupertino.mrwillcom.com/configuration/navigation">cupertino-configuration</a>。最后，我的配置文件”_config.cupertino.yml”内容如图。<br><img src="/imgs/20240615011.png" title="cupertino-configuration"><br><img src="/imgs/20240615009.png" title="_config.cupertino.yml"><br>将独特的“彩虹月份”改到了我生日所在的2月，嘿嘿。</p>
 <h3 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h3><h4 id="图片素材管理原方案"><a href="#图片素材管理原方案" class="headerlink" title="图片素材管理原方案"></a>图片素材管理原方案</h4><p>刚开始写博客时，我的图片素材管理方案是，将图片上传到某个线上库，然后直接在博文中通过链接引用。由于钱包空空，而且博客也是通过GitHub部署，所以我选择了Github新建个repository来放图片素材。<br>新建的repo，写文时已经被有强迫症的我删除了哈哈</p>
 <p><img src="/imgs/20240615001.png" title="图片素材repo删除记录"></p>
