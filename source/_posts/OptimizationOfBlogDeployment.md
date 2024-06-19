@@ -1,11 +1,22 @@
 ---
-title: 记一次对个人博客部署(主题+素材部署）的优化Optimization Of Blog Deployment
+title: 记一次对个人博客(主题+素材部署）的优化Optimization Of Blog Deployment
 date: 2024-06-11
 cover_image: /imgs/20240615000.png
 categories: tech-blog
 tags:
   - CS
 ---
+- [简述](#简述)
+- [详细过程](#详细过程)
+  - [Hexo主题DIY](#hexo主题diy)
+  - [发现问题](#发现问题)
+    - [图片素材管理原方案](#图片素材管理原方案)
+    - [一些建议](#一些建议)
+    - [问题点](#问题点)
+  - [见贤思齐](#见贤思齐)
+    - [大佬的repo](#大佬的repo)
+    - [优化的点](#优化的点)
+
 
 ## 简述
 我的个人博客已经搭建好了，详情见[我的第一篇博文]（写了搭博客的方法及过程嘿嘿）.

@@ -6,6 +6,17 @@ categories: tech-blog
 tags:
   - CS
 ---
+- [事发经过](#事发经过)
+- [解决方案](#解决方案)
+    - [`git flog`](#git-flog)
+    - [`git reflog`](#git-reflog)
+    - [`git fsck`](#git-fsck)
+    - [`git fsck --no-reflogs | awk '/dangling commit/ {print $3}'`](#git-fsck---no-reflogs--awk-dangling-commit-print-3)
+    - [`git show <commit-hash>`](#git-show-commit-hash)
+    - [`git cherry-pick <commit hash>`](#git-cherry-pick-commit-hash)
+    - [`git reset --hard <hash>`](#git-reset---hard-hash)
+- [过程截图](#过程截图)
+
 
 在使用VSC的过程中，发现了一个好用的git插件，GitLens。
 ![](/imgs/20240605008.png)
