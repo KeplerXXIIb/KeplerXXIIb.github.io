@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>今日，用AI大模型有感而发Some thoughts. - KeplerXXIIb</title>
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="今日，用AI大模型有感而发Some thoughts. - KeplerXXIIb" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="http://example.com/2024/06/26/SomeThoughts/index.html" />
+  
+  <meta property="og:image" content="/imgs/20240626007.jpeg" />
+  
+  <meta property="og:article:published_time" content="2024-06-26T00:00:00.000Z" />
+  
+  <meta property="og:article:author" content="KeplerXXIIb" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="2"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Blog</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">Friends</a>
+            
+            
+            
+            <a class="nav-item" href="/projects">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/KeplerXXIIb" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="/codepan" target="_blank" aria-label="CodePen">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="/patreon" target="_blank" aria-label="Patreon">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-mastodon nav-item-icon" href="/mastodon" target="_blank" aria-label="Mastodon">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="/discord" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/tech-blog/">tech-blog</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>June</span>
+            <span>26,</span>
+            <span>2024</span>
+        </div>
+        
+
+        <h1 class="title">今日，用AI大模型有感而发Some thoughts.</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <p>今天用某大厂的AI大模型时，遇到了个bug。我属实是没想到大厂会出这种bug，而且过了一早上才修复好的，害。</p>
+<p>问题描述：<br>该模型，我的账号下，有个优惠卡权益被自动激活，该优惠卡的使用时间是晚上。<br><img src="/imgs/20240626001.png"></p>
+<p>该模型现在是免费的，按理来说，能全时段一直使用。但是今早登录却报错，“晚上才能用”。<br><img src="/imgs/20240626002.png"><br>我推测，应该是用户权限出了问题，按理来说，应该是所有的权限（免费）并上优惠卡的权限，最后是所有时段都能用，但是现在变成了只能晚上用，估计是宣布功能免费的时候，系统层面直接将免费版的功能直接赋给所有用户了，而不是单独设置了角色然后给各用户赋角色。(经常用的人应该一眼就能看出这UI是哪家哈哈哈)。</p>
+<p>这个bug应该是到中午才解决的（我没有一直跟踪，反正午饭前试了下没好，下午2点多尝试的时候发现恢复正常了）。我搜了下，发现贴吧上很多人都在反映这个情况，说明这个bug应该是全局的，影响到了很多用户。<br><img src="/imgs/20240626008.png"><br>虽然目前AI大模型还没有很“硬核”的应用落地，但是这样的问题让用户有半天的时间没法用，个人认为不是个小问题。<br>而且还有个问题就是反馈渠道不健全。在该应用官网除了一个邮箱，我没找到其他有效的反馈渠道，而且早上我写了邮件，直到晚上11点都没人回。那个“意见反馈”栏，填多少也没人理。只能说，该厂该项目的项目经理，要么钱给少了，要么功夫没到家，哈哈，用户反馈的渠道都没搭好，挺离谱的。</p>
+<p>所以，大厂有时候也不一定能“保证质量”。可能这和企业文化有关系哈哈，是该对各类大厂、“权威”祛祛魅了。</p>
+<p>我觉着，该厂的项目经理A，在他&#x2F;她的脑海里，用户可能是这样的：</p>
+<blockquote>
+<p>使用产品之前熟读“用户手册”，使用产品起来游刃有余，在遇到一些问题时（一般是遇到技术问题或者有建议），会通过“反馈”的渠道反馈给后台。<br>我觉着文中开头提到的大厂的PM，估计就是A这种类型的。<br>可以去看下这个有bug的大厂的AI大模型UI，它只有一个孤零零的“反馈”界面。用户反馈&#x2F;求助的界面，除了这个提交框，下面一串邮箱，其他毛也没有。这个提交框你提交100次，也没人理，用户体验较差。<br><img src="/imgs/20240626006.png"></p>
+</blockquote>
+<p>个人认为，很多时候，对于某产品，用户不是所有功能都懂了才使用的，而是边使用产品边学习如何使用，即边用边学。<br>如果产品设计者能够在用户觉得不知道如何使用、有疑问时，及时给出指引，那么用户的体验会很好。<br>对于AI知识大模型（此处只指中的此类应用（问答型，没有很高的使用门槛）而言，当遇到问题时，用户一般会选择直接问客服来获得解决方案，而不是自己去翻看又臭又长的用户手册。<br>且当遇到系统bug等需要产品设计者解决的问题时，如果能得到及时的处理（得到反馈），那么用户对该产品的好感也会倍增。</p>
+<p>这里想点名说下鹅厂的设计哈哈。<br>感觉鹅厂的PM和刚才例子中的PM就不太一样，其更会“宠客户”，或者说更有“用户思维”。打开鹅厂的AI大模型应用网页“元宝”（刚开始腾讯只有“混元”，现在孵化出了“元宝”、“元器”），示例如下：</p>
+<blockquote>
+</blockquote>
+<p>这里是“元宝”的“反馈”界面。<br><img src="/imgs/20240626003.png"><br><img src="/imgs/20240626004.png"><br><img src="/imgs/20240626005.png"></p>
+<p>在“元宝”的反馈界面，第一行是用户常见的热门问题，然后是元宝的介绍及使用方法，后面是问题的大分类。右边才是之前项目经理A的中“反馈”板块的内容（技术问题或建议）。点开“发送反馈”或者“在线客服”按钮，都会链接到专门的客服平台。<br>以上足以看出鹅厂PM对用户画像拿捏得精准：</p>
+<ol>
+<li>用户们几乎都是边用边学；</li>
+<li>用户反馈时，大部分是因为遇到些小问题，很小概率是遇到需要后台解决的系统问题或者提建议</li>
+</ol>
+<p>所以相应设计的也是：</p>
+<ol>
+<li>反馈界面点进来就是”热门问题“</li>
+<li>为了方便检索，专门添加了问题大类，方便直接查询</li>
+<li>对于发生频率较低的特殊问题反馈及建议反馈，在右边链接了专属客服平台</li>
+</ol>
+<p>这用户体验，搁谁谁不舒服啊，是不是？和刚才项目经理A的例子可谓是一个天上一个地下。</p>
+<p>综上，就像说一句，细节真的很重要。</p>
+
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by KeplerXXIIb, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/CS/" class="tag">#CS</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        <a class="next"></a>
+        
+        <a href="/2024/06/11/OptimizationOfBlogDeployment/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">记一次对个人博客(主题+素材部署）的优化Optimization Of Blog Deployment</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Blog</h2>
+                
+                <a href="/" class="item">Blog</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+                <a href="/search" class="item">Search</a>
+                
+                <a href="/friends" class="item">Friends</a>
+                
+                <a href="/projects" class="item">Projects</a>
+                
+                <a href="/resume" class="item">Resume</a>
+                
+                <a href="/about" class="item">About</a>
+                
+                <a href="/atom.xml" class="item">RSS</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Projects</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/KeplerXXIIb/CS-Learning" class="item">C-Learning</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/KeplerXXIIb" class="item">GitHub</a>
+                
+                <a href="QQ:936474910@qq.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 KeplerXXIIb<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>
