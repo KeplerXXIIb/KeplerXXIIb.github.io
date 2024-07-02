@@ -1,5 +1,5 @@
 ---
-title: 今日，用AI大模型有感而发Some thoughts.
+title: 今日，用AI大模型有感而发Some thoughts about AI.
 date: 2024-06-26
 cover_image: /imgs/20240626007.jpeg
 categories: tech-blog
