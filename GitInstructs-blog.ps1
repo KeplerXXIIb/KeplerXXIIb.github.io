@@ -15,10 +15,10 @@ if ($continue.ToLower() -eq "y") {
         $date = Get-Date -Format "yyyy-MM-dd"
         $commitMessage = "$date update$count by PowerShellScript"  
         git commit -m $commitMessage  
-        $continue = Read-Host "execute [git push]?(y/n)"  
+        $continue = Read-Host "execute [git push --force]?(y/n)"  
         if ($continue.ToLower() -eq "y") {  
             # 执行 git push  
-            git push myblog main  
+            git push myblog main --force
         }
 
     }  
