@@ -1,10 +1,25 @@
+---
+title: 汇编语言实验过程记录202504（持续更新中）
+date: 2025-04-16
+cover_image: /imgs/20250416001.jpg
+categories: tech-blog
+tags:
+  - CS
+---
+# 汇编语言实验过程记录
 
+## 实验来源
+《汇编语言》（第3版，王爽著）P92
+![](/imgs/20250416001.jpg)
 
-## 汇编语言实验过程记录202504（持续更新中）
-
+## 相关链接
+https://www.dosbox.com
+https://www.masm32.com/index.htm
+https://github.com/froginwell/assembly
 https://www.bilibili.com/video/BV1cb411L7Hv/?spm_id_from=333.337.search-card.all.click&vd_source=5e2a8b05cdeecce93e566eee1d4ecbea
 https://www.masm32.com/index.htm
 
+## 实验内容及记录
 _____________模板
 ### 实验X
 #### 实验内容
@@ -60,7 +75,7 @@ ss:sp指向的地址是2000:0010，此时2000:0000 0010存储的是下一条要�
   ![](/imgs/20250416-2-expt3-p3.jpg)
   ![](/imgs/20250416-3-expt3-p4.jpg)
 3. 
-用debug加载t1.exe，查看PSP内容。可参考《汇编语言》（第3版，王爽著）P92。
+用debug加载t1.exe，查看PSP内容。可参考P92。
 操作系统调用DosBox（这里是使用dosbox模拟x8086 16位，下一步这里直接写成DOS，就不再写DosBox套娃了），DOS调用command，command调用debug.exe，debug调用t1.exe。
 程序段前缀PSP(Program Segment Prefix)与程序区虽然内存地址连续，但是段地址不同。其中PSP大小256字节。设PSP地址为SA:0，程序区地址则为SA+10H:0。
 CS:IP存储CPU要执行的下一条指令，根据2.可知，程序段段地址为076AH:0，所以PSP地址为075AH:0。使用debug中"-d"语句查看该地址内存内容得下图，头两个字节即CD 20。
