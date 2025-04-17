@@ -34,7 +34,7 @@ tags:
 
 ## 实验来源
 《汇编语言》（第3版，王爽著）P92
-![](/imgs/20250416001.jpg){width=500px height=300px}
+![](/imgs/20250416001.jpg?width=300&height=200)
 
 ## 相关链接
 https://www.dosbox.com
