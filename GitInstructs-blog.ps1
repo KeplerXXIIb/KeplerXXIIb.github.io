@@ -10,10 +10,15 @@ if ($continue.ToLower() -eq "y") {
     $continue = Read-Host "execute [git commit]?(y/n)"  
     if ($continue.ToLower() -eq "y") {  
         # 执行 git commit  
-        Write-Host "N times commit today? Input N:"  
+        $continue = Read-Host "add extra note?(y/n)"  
+        if ($continue.ToLower() -eq "y") {  
+            Write-Host "Write ur note:"  
+            $note = Read-Host
+        } else { $note = ""}
+        Write-Host "No. N commit today? Input N:"
         $count = Read-Host
         $date = Get-Date -Format "yyyy-MM-dd"
-        $commitMessage = "$date update$count by PowerShellScript"  
+        $commitMessage = "$note $date-$count by PSS-K"  
         git commit -m $commitMessage  
         $continue = Read-Host "execute [git push --force]?(y/n)"  
         if ($continue.ToLower() -eq "y") {  
