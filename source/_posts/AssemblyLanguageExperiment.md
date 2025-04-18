@@ -31,6 +31,9 @@ tags:
     - [实验5](#实验5)
       - [实验内容](#实验内容-6)
       - [实验过程及结论](#实验过程及结论-5)
+    - [实验6](#实验6)
+      - [实验内容](#实验内容-7)
+      - [实验过程及结论](#实验过程及结论-6)
 
 ## 实验来源
 《汇编语言》（第3版，王爽著）P92
@@ -309,4 +312,59 @@ end start
 ```
 ![](/imgs/20250417-31-expt5-31.jpg)
 
+### 实验6
+#### 实验内容
+![](/imgs/20250418001-expt6-1.jpg)
 
+#### 实验过程及结论
+1.  略
+2.  
+p155-158中有关7.8的讲解很清晰，这里套用了7.8的代码。
+解决7.9中问题的代码如下：
+```asm
+assume cs:codesg,ds:datasg,ss:stacksg
+
+stacksg segment
+    dw 0,0,0,0,0,0,0,0
+stacksg ends
+
+datasg segment
+    db '1. display      '
+    db '2. brows        '
+    db '3. replaces     '
+    db '4. modify       '
+datasg ends
+
+codesg segment
+start:  mov ax,stacksg
+        mov ss,ax
+        mov sp,16
+        mov ax,datasg
+        mov ds,ax
+        mov bx,0
+
+        mov cx,4
+s0:     push cx
+        mov si,3
+
+        mov cx,4
+s:      mov al,[bx+si]
+        and al,11011111b
+        mov [bx+si],al
+        inc si
+        loop s
+
+        add bx,16
+        pop cx
+        loop s0
+
+    mov ax,4c00h
+    int 21h
+codesg ends
+
+end start
+```
+程序执行前datasg值如下图：
+![](/imgs/20250418002-expt6-2.jpg)
+程序执行后datasg值如下图：
+![](/imgs/20250418003-expt6-3.jpg)
