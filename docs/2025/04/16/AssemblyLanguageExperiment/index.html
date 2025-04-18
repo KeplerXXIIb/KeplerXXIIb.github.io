@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>汇编语言实验过程记录202504（持续更新中） - KeplerXXIIb</title>
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="汇编语言实验过程记录202504（持续更新中） - KeplerXXIIb" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="http://example.com/2025/04/16/AssemblyLanguageExperiment/index.html" />
+  
+  <meta property="og:image" content="/imgs/20250416001.jpg" />
+  
+  <meta property="og:article:published_time" content="2025-04-16T00:00:00.000Z" />
+  
+  <meta property="og:article:author" content="KeplerXXIIb" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="2"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Blog</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">Friends</a>
+            
+            
+            
+            <a class="nav-item" href="/projects">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/KeplerXXIIb" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="/codepan" target="_blank" aria-label="CodePen">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="/patreon" target="_blank" aria-label="Patreon">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-mastodon nav-item-icon" href="/mastodon" target="_blank" aria-label="Mastodon">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="/discord" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/tech-blog/">tech-blog</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>April</span>
+            <span>16,</span>
+            <span>2025</span>
+        </div>
+        
+
+        <h1 class="title">汇编语言实验过程记录202504（持续更新中）</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <h1 id="汇编语言实验过程记录"><a href="#汇编语言实验过程记录" class="headerlink" title="汇编语言实验过程记录"></a>汇编语言实验过程记录</h1><p>##目录</p>
+<ul>
+<li><a href="#%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95">汇编语言实验过程记录</a><ul>
+<li><a href="#%E5%AE%9E%E9%AA%8C%E6%9D%A5%E6%BA%90">实验来源</a></li>
+<li><a href="#%E7%9B%B8%E5%85%B3%E9%93%BE%E6%8E%A5">相关链接</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A8%A1%E6%9D%BF">【模板】</a><ul>
+<li><a href="#%E5%AE%9E%E9%AA%8Cx">实验X</a><ul>
+<li><a href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9">实验内容</a></li>
+<li><a href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E5%8F%8A%E7%BB%93%E8%AE%BA">实验过程及结论</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-1">实验内容</a><ul>
+<li><a href="#%E5%AE%9E%E9%AA%8C1">实验1</a><ul>
+<li><a href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-2">实验内容</a></li>
+<li><a href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E5%8F%8A%E7%BB%93%E8%AE%BA-1">实验过程及结论</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E9%AA%8C2">实验2</a><ul>
+<li><a href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-3">实验内容</a></li>
+<li><a href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E5%8F%8A%E7%BB%93%E8%AE%BA-2">实验过程及结论</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E9%AA%8C3">实验3</a><ul>
+<li><a href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-4">实验内容</a></li>
+<li><a href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E5%8F%8A%E7%BB%93%E8%AE%BA-3">实验过程及结论</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E9%AA%8C4">实验4</a><ul>
+<li><a href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-5">实验内容</a></li>
+<li><a href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E5%8F%8A%E7%BB%93%E8%AE%BA-4">实验过程及结论</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E9%AA%8C5">实验5</a><ul>
+<li><a href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-6">实验内容</a></li>
+<li><a href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E5%8F%8A%E7%BB%93%E8%AE%BA-5">实验过程及结论</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E9%AA%8C6">实验6</a><ul>
+<li><a href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-7">实验内容</a></li>
+<li><a href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E5%8F%8A%E7%BB%93%E8%AE%BA-6">实验过程及结论</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="实验来源"><a href="#实验来源" class="headerlink" title="实验来源"></a>实验来源</h2><p>《汇编语言》（第3版，王爽著）P92<br><img src="/imgs/20250416001.jpg"></p>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p><a target="_blank" rel="noopener" href="https://www.dosbox.com/">https://www.dosbox.com</a><br><a target="_blank" rel="noopener" href="https://www.masm32.com/index.htm">https://www.masm32.com/index.htm</a><br><a target="_blank" rel="noopener" href="https://github.com/froginwell/assembly">https://github.com/froginwell/assembly</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1cb411L7Hv/?spm_id_from=333.337.search-card.all.click&vd_source=5e2a8b05cdeecce93e566eee1d4ecbea">https://www.bilibili.com/video/BV1cb411L7Hv/?spm_id_from=333.337.search-card.all.click&amp;vd_source=5e2a8b05cdeecce93e566eee1d4ecbea</a><br><a target="_blank" rel="noopener" href="https://www.masm32.com/index.htm">https://www.masm32.com/index.htm</a></p>
+<h1 id="【模板】"><a href="#【模板】" class="headerlink" title="【模板】"></a>【模板】</h1><p>_____________模板</p>
+<h3 id="实验X"><a href="#实验X" class="headerlink" title="实验X"></a>实验X</h3><h4 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h4><h4 id="实验过程及结论"><a href="#实验过程及结论" class="headerlink" title="实验过程及结论"></a>实验过程及结论</h4><ol>
+<li></li>
+<li><img src="/imgs/XXXXXXXXXXX"><br>_____________模板</li>
+</ol>
+<h2 id="实验内容-1"><a href="#实验内容-1" class="headerlink" title="实验内容"></a>实验内容</h2><h3 id="实验1"><a href="#实验1" class="headerlink" title="实验1"></a>实验1</h3><h4 id="实验内容-2"><a href="#实验内容-2" class="headerlink" title="实验内容"></a>实验内容</h4><p><img src="/imgs/20250414-1-expt1-p1.jpg"><br><img src="/imgs/20250414-2-expt1-p2.jpg"></p>
+<h4 id="实验过程及结论-1"><a href="#实验过程及结论-1" class="headerlink" title="实验过程及结论"></a>实验过程及结论</h4><p>1. </p>
+<ol>
+<li>Dosbox中默认输入数据时就是十六进制，不需要加入“H”。</li>
+<li>al、bl代表的是ax寄存器低位（8位）、bx寄存器低位（8位）</li>
+<li>al&#x2F;bl进行运算时，如果遇到进位溢出，那么高位不会自动变化，只是改变了标志位。</li>
+</ol>
+<ol start="2">
+<li>可利用jmp指令实现循环</li>
+<li>由于DosBox是模拟的环境，这里在ROM中查找生产日期的实验未成功，因为FFFF00H~FFFFFH内存地址存的值是空。</li>
+<li>在A0000<del>BFFFF区间写入数据时，指令无效，因为这部分是显存地址的所在空间（A0000\</del>BFFFF）.<br><img src="/imgs/20250414-3-expt1-p3.jpg"></li>
+</ol>
+<h3 id="实验2"><a href="#实验2" class="headerlink" title="实验2"></a>实验2</h3><h4 id="实验内容-3"><a href="#实验内容-3" class="headerlink" title="实验内容"></a>实验内容</h4><p><img src="/imgs/20250414-4-expt2-p1.jpg"><br><img src="/imgs/20250414-5-expt2-p2.jpg"></p>
+<h4 id="实验过程及结论-2"><a href="#实验过程及结论-2" class="headerlink" title="实验过程及结论"></a>实验过程及结论</h4><ol>
+<li></li>
+</ol>
+<p>1)<br>  ax&#x3D;C0EA,ax&#x3D;C0FC;<br>  bx&#x3D;30F0,bx&#x3D;6021;<br>  ss&#x3D;2200,sp&#x3D;00FE,修改的内存单元的地址是2200:00FE、2200:00FF;内容为C0FC;<br>  ss&#x3D;2200,sp&#x3D;00FC,修改的内存单元的地址是2200:00FC、2200:00FD;内容为6021’<br>  sp&#x3D;00FE,ax&#x3D;6021;<br>  sp&#x3D;0100,ax&#x3D;6021;<br>  ss&#x3D;2200,sp&#x3D;00FE,修改的内存单元的地址是2200:00FE、2200:00FF;内容为F030;<br>  ss&#x3D;2200,sp&#x3D;00FC,修改的内存单元的地址是2200:00FC、2200:00FD;内容为312F；</p>
+<ol start="2">
+<li>为什么2000:0~2000:f的内容会发生变化？<br>ss:sp指向的地址是2000:0010，此时2000:0000 0010存储的是下一条要执行的指令的地址信息（即CS、IP等寄存器的信息）</li>
+</ol>
+<h3 id="实验3"><a href="#实验3" class="headerlink" title="实验3"></a>实验3</h3><h4 id="实验内容-4"><a href="#实验内容-4" class="headerlink" title="实验内容"></a>实验内容</h4><p><img src="/imgs/20250415-1-expt3-p1.jpg"></p>
+<h4 id="实验过程及结论-3"><a href="#实验过程及结论-3" class="headerlink" title="实验过程及结论"></a>实验过程及结论</h4><p>1.<br>2.<br>  <img src="/imgs/20250416-1-expt3-p2.jpg"><br>  <img src="/imgs/20250416-2-expt3-p3.jpg"><br>  <img src="/imgs/20250416-3-expt3-p4.jpg"><br>3.<br>用debug加载t1.exe，查看PSP内容。可参考P92。<br>操作系统调用DosBox（这里是使用dosbox模拟x8086 16位，下一步这里直接写成DOS，就不再写DosBox套娃了），DOS调用command，command调用debug.exe，debug调用t1.exe。<br>程序段前缀PSP(Program Segment Prefix)与程序区虽然内存地址连续，但是段地址不同。其中PSP大小256字节。设PSP地址为SA:0，程序区地址则为SA+10H:0。<br>CS:IP存储CPU要执行的下一条指令，根据2.可知，程序段段地址为076AH:0，所以PSP地址为075AH:0。使用debug中”-d”语句查看该地址内存内容得下图，头两个字节即CD 20。<br>  <img src="/imgs/20250416-4-expt3-p5.jpg"></p>
+<h3 id="实验4"><a href="#实验4" class="headerlink" title="实验4"></a>实验4</h3><h4 id="实验内容-5"><a href="#实验内容-5" class="headerlink" title="实验内容"></a>实验内容</h4><p><img src="/imgs/20250416-5-expt4-p1.jpg"><br><img src="/imgs/20250416-6-expt4-p2.jpg"></p>
+<h4 id="实验过程及结论-4"><a href="#实验过程及结论-4" class="headerlink" title="实验过程及结论"></a>实验过程及结论</h4><ol>
+<li><img src="/imgs/20250416-7-expt4-p3.jpg"></li>
+<li>  在做part2时，遇到了几个问题。<br><img src="/imgs/20250416-8-expt4-p4.jpg"></li>
+</ol>
+<ol>
+<li>忘记了立即数不能直接传给段寄存器，我把立即数传给ds报错；</li>
+<li>使用”段:[偏移地址]”表示地址时，”[]”只能填index或寄存器，我填了寄存器的低位，报错；</li>
+<li>在改正2)和3)后，可以成功编译、链接、生成exe文件。但是执行时DOS窗口卡住无法输入，关掉重试后，DOS窗口还是卡住，DOS状态窗口直接报错：非法读取。<br><img src="/imgs/20250416-11-expt4-p7.jpg"><br>最后的问题3)，在分析报错+DeepSeek搜索后发现错误，地址换算错了，取到的地址为2h，这部分内存地址不可随意写入，已解决。<br><img src="/imgs/20250417-1-expt4-p9.jpg"><br><img src="/imgs/20250416-9-expt4-p5.jpg"><br><img src="/imgs/20250416-10-expt4-p6.jpg"></li>
+</ol>
+<ol start="3">
+<li><img src="/imgs/20250416-12-expt4-p8.jpg"><br>补充的两个空分别为 ss,10。</li>
+</ol>
+<ol>
+<li>赋值的是汇编代码的二进制表示，从 mov ax,ss 到loop s。</li>
+<li>通过debug&gt;-d 0:200可查看最后占用的内存地址，从而计算出复制的字节数</li>
+</ol>
+<h3 id="实验5"><a href="#实验5" class="headerlink" title="实验5"></a>实验5</h3><h4 id="实验内容-6"><a href="#实验内容-6" class="headerlink" title="实验内容"></a>实验内容</h4><p><img src="/imgs/20250417-1-expt5-p1.jpg"><br><img src="/imgs/20250417-2-expt5-p2.jpg"><br><img src="/imgs/20250417-3-expt5-p3.jpg"><br><img src="/imgs/20250417-4-expt5-p4.jpg"><br><img src="/imgs/20250417-5-expt5-p5.jpg"></p>
+<h4 id="实验过程及结论-5"><a href="#实验过程及结论-5" class="headerlink" title="实验过程及结论"></a>实验过程及结论</h4><ol>
+<li>程序执行前debug -r如图：<br><img src="/imgs/20250417-6-expt5-p6.jpg"></li>
+</ol>
+<p>程序执行前，三个段的内容如下：<br><img src="/imgs/20250417-9-expt5-p9.jpg"><br><img src="/imgs/20250417-10-expt5-p10.jpg"></p>
+<p>程序执行后，三个段的内容如下：<br><img src="/imgs/20250417-7-expt5-p7.jpg"><br><img src="/imgs/20250417-8-expt5-p8.jpg"></p>
+<ol>
+<li>程序返回前，data段中的数据组成如图：<br><img src="/imgs/20250417-7-expt5-p7.jpg"><br>组成部分有原来的数据+不知名数据+DOS中的PSP段。</li>
+<li>cs:076Ch、ss:076Bh、ds:076Ah。<br>  data：076A，<br>  Stack：076B，<br>  Code：076C。</li>
+<li>code段地址X，则data段地址为X-2，stack段地址为X-1。</li>
+</ol>
+<ol start="2">
+<li>程序执行前debug -r如图：<br><img src="/imgs/20250417-11-expt5-p11.jpg"></li>
+</ol>
+<p>程序执行前，三个段的内容如下：<br><img src="/imgs/20250417-12-expt5-p12.jpg"><br><img src="/imgs/20250417-13-expt5-p13.jpg"></p>
+<p>程序执行后，三个段的内容如下：<br><img src="/imgs/20250417-14-expt5-p14.jpg"><br><img src="/imgs/20250417-15-expt5-p15.jpg"></p>
+<ol>
+<li>见程序执行前的段内容截图</li>
+<li>见程序执行后的段内容截图</li>
+<li>code段地址X，则data段地址为X-2，stack段地址为X-1。<br>  data：076A，<br>  Stack：076B，<br>  Code：076C。<br>  虽然分配了3个段，但是每个段的长度并不一样，而是根据数据的长度灵活分配的。</li>
+<li>⌈N&#x2F;16⌉*16 字节</li>
+</ol>
+<p>5.<br>程序执行前debug -r如图：<br><img src="/imgs/20250417-16-expt5-p16.jpg"></p>
+<p>程序执行前，三个段的内容如下：<br><img src="/imgs/20250417-17-expt5-p17.jpg"><br><img src="/imgs/20250417-18-expt5-p18.jpg"></p>
+<p>程序执行后，三个段的内容如下：<br><img src="/imgs/20250417-19-expt5-p19.jpg"><br><img src="/imgs/20250417-20-expt5-p20.jpg"></p>
+<ol>
+<li>见程序执行前的段内容截图</li>
+<li>见程序执行后的段内容截图</li>
+<li>code段地址X，则data段地址为X-2，stack段地址为X-1。<br>  Code：076A，<br>  data：076D，<br>  Stack：076E。</li>
+</ol>
+<p>这次出数据后我发现两个可疑的点，<br>1、空白（无操作）区域数据不对劲。<br>之前的实验，空白区域一般都是0，但这次不是0，有可能是因为我结束上次实验后没有重启dosbox，RAM区域里还有之前实验的数据残留。<br>2、为什么code段与data段系统分配时隔了3？<br>图中 CD:21 说明有一个段是PSP，之前教材上说PSP为256字节（p92），这里没有规定段长，可以将PSP定为一个段呀，为什么段号相隔了3？</p>
+<p>带着疑问，我重启了DOSBox又来了一次，结果如下。<br>程序执行前debug -r、段的内容如下：<br><img src="/imgs/20250417-21-expt5-p21.jpg"></p>
+<p>程序执行后，三个段的内容如下：<br><img src="/imgs/20250417-22-expt5-p22.jpg"><br><img src="/imgs/20250417-23-expt5-p23.jpg"></p>
+<p>做完发现结论和上次一致。但是这个CD 21还是没懂，截止到这章节教材没有深入，只说CD 21 和PSP有密切联系。最后请来了deepseek答疑解惑：<br><img src="/imgs/20250417-24-expt5-p24.jpg"><br>结论如下：<br>![](&#x2F;imgs&#x2F;20250417001.jpeg<br>1、CD21即汇编指令”int 21H”在内存中存储的形式。debug中用-u即可查看。<br>2、PSP是DOS管理程序的核心数据结构，这里段号隔了3，是因为代码长度计算后需要占用3个段（3x16字节）。<br>3、​​INT 21h(CD 21)是DOS系统的核心功能调用入口</p>
+<ol start="4">
+<li>(3)可以正确执行，因为有没有start，程序开始执行的位置都一样。其它的执行失败，未执行到程序段中的语句，执行到了其它不知来源的语句。<br>  失败的运行结果如下图：（这里只贴了其中一个）<br>  <img src="/imgs/20250417-28-expt5-p28.jpg"><br>  成功的（3）如下图：<br>  <img src="/imgs/20250417-29-expt5-p29.jpg"></li>
+</ol>
+<ol start="5">
+<li>写了代码，运行成功<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">assume cs:code,ds:a,ss:b,es:c</span><br><span class="line"></span><br><span class="line">a segment</span><br><span class="line">    db 1,2,3,4,5,6,7,8</span><br><span class="line">a ends</span><br><span class="line"></span><br><span class="line">b segment</span><br><span class="line">    db 1,2,3,4,5,6,7,8</span><br><span class="line">b ends</span><br><span class="line"></span><br><span class="line">c segment</span><br><span class="line">    db 0,0,0,0,0,0,0,0</span><br><span class="line">c ends</span><br><span class="line"></span><br><span class="line">code segment</span><br><span class="line"></span><br><span class="line">start:  </span><br><span class="line">        mov bx,0</span><br><span class="line">        mov cx,8</span><br><span class="line"></span><br><span class="line">s:      mov ax,a</span><br><span class="line">        mov ds,ax</span><br><span class="line">        mov dx,ds:[bx]</span><br><span class="line"></span><br><span class="line">        mov ax,b</span><br><span class="line">        mov ss,ax</span><br><span class="line">        add dx,ss:[bx]</span><br><span class="line"></span><br><span class="line">        mov ax,c</span><br><span class="line">        mov es,ax</span><br><span class="line">        mov es:[bx],dx</span><br><span class="line">        inc bx</span><br><span class="line">        loop s</span><br><span class="line"></span><br><span class="line">    mov ax,4c00h</span><br><span class="line">    int 21h</span><br><span class="line">code ends</span><br><span class="line"></span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
+<img src="/imgs/20250417-30-expt5-30.jpg"><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line">6. 写了代码，运行成功</span><br><span class="line">```asm</span><br><span class="line">assume cs:code,ds:a,ss:b</span><br><span class="line"></span><br><span class="line">a segment</span><br><span class="line">    dw 1,2,3,4,5,6,7,8,9,0ah,0bh,0ch,0dh,0eh,0fh,0ffh</span><br><span class="line">a ends</span><br><span class="line"></span><br><span class="line">b segment</span><br><span class="line">    dw 0,0,0,0,0,0,0,0</span><br><span class="line">b ends</span><br><span class="line"></span><br><span class="line">code segment</span><br><span class="line"></span><br><span class="line">start:  </span><br><span class="line">        mov ax,b</span><br><span class="line">        mov ss,ax</span><br><span class="line">        mov sp,16</span><br><span class="line"></span><br><span class="line">        mov bx,0</span><br><span class="line">        mov cx,8</span><br><span class="line"></span><br><span class="line">s:      mov ax,a</span><br><span class="line">        mov ds,ax</span><br><span class="line">        mov ax,ds:[bx]</span><br><span class="line">        push ax</span><br><span class="line">        add bx,2</span><br><span class="line">        loop s</span><br><span class="line">    mov ax,4c00h</span><br><span class="line">    int 21h</span><br><span class="line">code ends</span><br><span class="line"></span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
+<img src="/imgs/20250417-31-expt5-31.jpg"></li>
+</ol>
+<h3 id="实验6"><a href="#实验6" class="headerlink" title="实验6"></a>实验6</h3><h4 id="实验内容-7"><a href="#实验内容-7" class="headerlink" title="实验内容"></a>实验内容</h4><p><img src="/imgs/20250418001-expt6-1.jpg"></p>
+<h4 id="实验过程及结论-6"><a href="#实验过程及结论-6" class="headerlink" title="实验过程及结论"></a>实验过程及结论</h4><ol>
+<li>略</li>
+<li>p155-158中有关7.8的讲解很清晰，这里套用了7.8的代码。<br>解决7.9中问题的代码如下：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">assume cs:codesg,ds:datasg,ss:stacksg</span><br><span class="line"></span><br><span class="line">stacksg segment</span><br><span class="line">    dw 0,0,0,0,0,0,0,0</span><br><span class="line">stacksg ends</span><br><span class="line"></span><br><span class="line">datasg segment</span><br><span class="line">    db &#x27;1. display      &#x27;</span><br><span class="line">    db &#x27;2. brows        &#x27;</span><br><span class="line">    db &#x27;3. replaces     &#x27;</span><br><span class="line">    db &#x27;4. modify       &#x27;</span><br><span class="line">datasg ends</span><br><span class="line"></span><br><span class="line">codesg segment</span><br><span class="line">start:  mov ax,stacksg</span><br><span class="line">        mov ss,ax</span><br><span class="line">        mov sp,16</span><br><span class="line">        mov ax,datasg</span><br><span class="line">        mov ds,ax</span><br><span class="line">        mov bx,0</span><br><span class="line"></span><br><span class="line">        mov cx,4</span><br><span class="line">s0:     push cx</span><br><span class="line">        mov si,3</span><br><span class="line"></span><br><span class="line">        mov cx,4</span><br><span class="line">s:      mov al,[bx+si]</span><br><span class="line">        and al,11011111b</span><br><span class="line">        mov [bx+si],al</span><br><span class="line">        inc si</span><br><span class="line">        loop s</span><br><span class="line"></span><br><span class="line">        add bx,16</span><br><span class="line">        pop cx</span><br><span class="line">        loop s0</span><br><span class="line"></span><br><span class="line">    mov ax,4c00h</span><br><span class="line">    int 21h</span><br><span class="line">codesg ends</span><br><span class="line"></span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
+程序执行前datasg值如下图：<br><img src="/imgs/20250418002-expt6-2.jpg"><br>程序执行后datasg值如下图：<br><img src="/imgs/20250418003-expt6-3.jpg"></li>
+</ol>
+
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by KeplerXXIIb, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/CS/" class="tag">#CS</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        <a class="next"></a>
+        
+        <a href="/2025/03/27/LearningCompilationPrinciple&amp;AssemblyLanguage/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">学习编译原理与汇编！</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Blog</h2>
+                
+                <a href="/" class="item">Blog</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+                <a href="/search" class="item">Search</a>
+                
+                <a href="/friends" class="item">Friends</a>
+                
+                <a href="/projects" class="item">Projects</a>
+                
+                <a href="/resume" class="item">Resume</a>
+                
+                <a href="/about" class="item">About</a>
+                
+                <a href="/atom.xml" class="item">RSS</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Projects</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/KeplerXXIIb/CS-Learning" class="item">C-Learning</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/KeplerXXIIb" class="item">GitHub</a>
+                
+                <a href="QQ:936474910@qq.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2025 KeplerXXIIb<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>
