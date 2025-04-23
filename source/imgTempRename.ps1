@@ -13,7 +13,8 @@ $files = Get-ChildItem -Path $folderPath -File
 # 遍历并重命名每个文件
 foreach ($file in $files) {
     # 构建新的文件名
-    $newName = "$currentDate-$fileCount$($file.Extension)"
+    $formattedCount = "{0:D2}" -f $fileCount
+    $newName = "$currentDate$formattedCount$($file.Extension)"
     
     # 构建新的文件路径
     $newFilePath = Join-Path -Path $folderPath -ChildPath $newName

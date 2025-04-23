@@ -375,7 +375,151 @@ end start
 
 ### 实验7
 #### 实验内容
+![](/imgs/2025042301-expt7-1.jpg)
+![](/imgs/2025042302-expt7-2.jpg)
+![](/imgs/2025042303-expt7-3.jpg)
 #### 实验过程及结论
-1.  
-2.  
-![](/imgs/XXXXXXXXXXX)
+最终代码
+```masm
+assume ds:data,ss:stack,es:table,cs:code
+data segment
+    db '1975','1976','1977','1978','1979','1980','1981','1982','1983','1984'
+    db '1985','1986','1987','1988','1989','1990','1991','1992','1993','1994','1995'
+    ;以上为表示 年份 的字符串
+
+    dd 16,22,382,1356,2390,8000,16000,24486,50065,97479
+    dd 140417,197514,345980,590827,803530,1183000,1843000,2759000,3753000,4649000,5937000
+    ;以上为表示 收入 的字符串
+
+    dw 3,7,9,13,28,38,130,220,476,778
+    dw 1001,1442,2258,2793,4037,5635,8226,11542,14430,15257,17800
+    ;以上为表示 雇员数 的字符串
+
+data ends
+
+stack segment
+    dw 0,0,0,0,0,0,0,0
+    ;提前申请栈空间
+stack ends
+
+table segment
+    db 21 dup('year summ ne ?? ')
+    ;data段中数据最终要写入的数据段
+
+table ends
+
+code segment
+
+start:  
+    mov ax,data
+    mov ds,ax
+
+    mov ax,stack
+    mov ss,ax
+    mov sp,16
+
+    mov ax,table
+    mov es,ax
+
+    mov di,0
+    mov cx,21
+    ;di：行号-1，共21行，di的最大值为20。使用di来标记当前操作的行号（或者年份），di=0为1975年，di=1为1976年，以此递推，
+
+s0: push cx
+    mov bx,0        
+    mov cx,di
+
+s1: add bx,16
+    loop s1
+    ;在table段中，不同个表结构是连续存放的，每个表结构16字节
+    ;计算当前要操作的表结构偏移地址bx,bx=di*16
+
+    mov dx,0
+    mov cx,di
+s2: add dx,4         
+    loop s2
+    
+    ;在data段中，同一个字段是连续存放的，“年份”字段每个字段占4个字节，
+    ;计算当前要操作的data段中“年份”字段偏移地址bx=di*4
+    ;先保存现有的bx值，因为等会儿其它操作需用到bx
+    ;如果把"push bx"放到复制年份的循环中，栈不平衡（push少pop多），
+    ;为了栈平衡，这里做了改动，ds段的偏移值计算出后先用dx存储（因为dx暂时用不到，其它x类寄存器要用到），到循环中后再对bx进行push、pop操作
+
+    mov cx,4
+    mov si,0       
+    ;“年份”字段是用db定义的，每个字段有4个字节，每次操作1个字节，用al，每个字段需重复操作4次，cx=4
+s3: push bx
+    mov bx,dx
+    mov al,ds:[bx].0h[si]  
+    pop bx
+    mov byte ptr es:[bx].0h[si],al
+    inc si
+    loop s3
+
+    ;复制年份
+    ;es:[bx].0h[si]， 其中 bx：table不同行的基址，                             0h：该行中不同字段的基址，        si：该字段中不同字符的基址
+    ;ds:[bx].54h[si]，其中 bx：di x 字段长度，某字段连续空间中该字段不同行的基址  0h：不同字段连续空间的基址，      si：该字段中不同字符的基址
+
+    push bx
+    mov bx,0
+    mov cx,di
+s4:add bx,4         
+    loop s4
+    ;“收入”字段是用dd定义的，每个字段占了2个字，4个字节，每次操作1个字（2字节），用2个寄存器，每个字段需操作1次
+ 
+    mov ax,ds:[bx].54h[0]
+    mov dx,ds:[bx].54h[2] 
+    pop bx
+    mov word ptr es:[bx].5h[0],ax
+    mov word ptr es:[bx].5h[2],dx
+    ;复制收入
+
+    push bx
+    mov bx,0
+    mov cx,di
+s5: add bx,2        
+    loop s5
+    ;“雇员数”字段是用dw定义的，每个字段占了2个字节，每次操作1个字（2字节），用1个寄存器，每个字段需操作1次
+    ;计算当前要操作的data段中“年份”字段偏移地址bx=di*2
+
+    mov ax,ds:[bx].0a8h
+    pop bx
+    mov word ptr es:[bx].0ah,ax
+    ;复制雇员数
+
+    ;人均收入=收入/雇员数，被除数4字节，用dx存高位，ax存低位，除数2字节，用bx存储，商存到ax中，余数存到dx中
+    mov dx,es:[bx].7h
+    mov ax,es:[bx].5h
+    mov cx,es:[bx].0ah
+    div cx
+    mov word ptr  es:[bx].0dh,ax
+    ;依次计算人均收入并填入
+
+    inc di
+    pop cx
+    loop s0
+    
+    mov ax,4c00h
+    int 21h
+code ends
+end start
+
+```
+结果图
+![](/imgs/2025042304-expt7-4.jpg)
+
+在完成该实验的过程中犯了很多大大小小的错误哈哈哈，将犯了错的知识点总结如下：
+1.数据类型与空间大小对应
+data段中定义数据时，使用db、dw、dd定义的数据类型大小各不同，在对数据进行复制时需注意按照数据类型进行指定操作，
+如：db定义的是byte，1字节，dw定义的是word，2字节，dd定义的是dword，4字节。
+在进行复制操作时，db需用半个寄存器，比如al、ah等，dw需用1个寄存器，如ax、bx等，dd需用两个寄存器。
+从寄存器➡内存地址时，需指定类型，这样系统才知道要复制多少个字节；
+从内存地址➡寄存器时，不需指定，因为默认会按寄存器复制相应的数据，如al复制1个字节，ax则复制2个字节。
+
+2.栈使用
+使用栈操作push、pop时，需注意“栈平衡”，不然值可能不是你想要的，操作时细心一些就好。
+
+3.使用灵活的定位内存地址方法时，注意只有特定寄存器（bx、si、di、bp）才能进行定位操作，且需注意每个寄存器的特点。
+
+4.除法操作，需注意不同位数下被除数、除数、商、余数的存放位置。
+  
