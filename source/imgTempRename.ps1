@@ -8,7 +8,7 @@ $currentDate = Get-Date -Format "yyyyMMdd"
 $fileCount = 1
 
 # 获取文件夹中的所有文件
-$files = Get-ChildItem -Path $folderPath -File
+$files = Get-ChildItem -Path $folderPath -File|Sort-Object CreationTime
 
 # 遍历并重命名每个文件
 foreach ($file in $files) {

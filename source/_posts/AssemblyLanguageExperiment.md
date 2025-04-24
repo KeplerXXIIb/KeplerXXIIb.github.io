@@ -43,6 +43,9 @@ tags:
     - [实验9](#实验9)
       - [实验内容](#实验内容-10)
       - [实验过程及结论](#实验过程及结论-9)
+    - [实验10](#实验10)
+      - [实验内容](#实验内容-11)
+      - [实验过程及结论](#实验过程及结论-10)
 
 ## 实验来源
 《汇编语言》（第3版，王爽著）P92
@@ -228,7 +231,7 @@ CS:IP存储CPU要执行的下一条指令，根据2.可知，程序段段地址�
 做完发现结论和上次一致。但是这个CD 21还是没懂，截止到这章节教材没有深入，只说CD 21 和PSP有密切联系。最后请来了deepseek答疑解惑：
 ![](/imgs/20250417-24-expt5-p24.jpg)
 结论如下：
-![](/imgs/20250417001.jpeg
+![](/imgs/20250417001.jpeg)
 1、CD21即汇编指令"int 21H"在内存中存储的形式。debug中用-u即可查看。
 2、PSP是DOS管理程序的核心数据结构，这里段号隔了3，是因为代码长度计算后需要占用3个段（3x16字节）。
 3、​​INT 21h(CD 21)是DOS系统的核心功能调用入口
@@ -592,4 +595,108 @@ end start
 ![](/imgs/2025042310-expt9-4.gif)
 
 
+### 实验10
+#### 实验内容
+2025042401.jpg
+2025042402.jpg
+2025042403.jpg
+2025042404.jpg
+2025042405.jpg
+2025042406.jpg
+2025042407r.jpg
+#### 实验过程及结论
+1. 显示字符串
+这里由于之前都写过相关的函数，所以没花多少时间。
+显示屏幕大小80x25字，显存段地址0B800h，偏移从0开始。且题目规定行号范围（0~79），列号范围（0~24），
+因此，X行Y列在显存中的偏移量（字节）就是(80*+Y)*2。
+```asm
+assume cs:code,ds:data
+data segment
+db 'Welcome to masm!',0
+data ends
 
+code segment
+start:  
+    mov dh,79
+    ;行数
+
+    mov dl,3
+    ;列号
+
+    mov cl,2
+    ;属性值
+
+    mov ax,data
+    mov ds,ax
+    mov si,0
+    call show_str
+    mov ax, 4C00h
+    int 21h
+
+show_str:
+    push ax
+    push bx
+    push cx
+    push dx
+    push di
+    push si
+
+    mov ax, 0B800h
+    mov es, ax
+
+    ;显示屏幕大小80x25字
+    ;因此，X行Y列在显存中的偏移量（字节）就是(80*(X-1)+Y)*2=(80X+Y-80)*2
+    ;修正，因为行号、列号范围都是从0开始，所以不需要再减1。而且上一个公式，就算行号不减1，列号也应该减，公式错误。
+    ;公式更新为：(80*X+Y)*2
+
+    mov al,80
+    mul dh
+    ;ax=al*dh,ax=80x行号
+
+    mov bl,dl
+    mov bh,0h
+    ;为了可以在寄存器计算，将列号扩充到bx中计算
+
+    add ax,bx
+    add ax,ax
+    ;计算完成后，起始位置（即在显存中的偏移量，单位字节）存到了ax中
+
+    mov di,ax
+    mov si,0
+    mov bl,cl
+    ;等会儿的循环中需要用cx，所以cl的值放到bl中
+write_into:
+    mov cl,ds:[si]
+    mov ch,0
+    ;cl存储字符的ASCII值，bl中存储属性（颜色）值
+
+    jcxz ok
+    mov es:[di],cl
+    mov byte ptr es:[di+1], bl
+    add di,2
+    inc si
+    jmp short write_into
+
+ok: pop si
+    pop di
+    pop dx
+    pop cx
+    pop bx
+    pop ax
+    ret
+
+
+code ends
+end start
+
+```
+实际代码实现后发现个问题，dosbox这显示应该是吞了一行。
+行数1列数3显示如下：
+2025042408.jpg
+行数80列数3显示如下：
+2025042409.jpg
+
+2. 解除除法溢出的问题
+
+
+![](/imgs/XXXXXXXXXXX)
