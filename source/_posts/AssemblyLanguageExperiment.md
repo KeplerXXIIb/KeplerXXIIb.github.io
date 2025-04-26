@@ -697,6 +697,156 @@ end start
 2025042409.jpg
 
 2. 解除除法溢出的问题
+最终代码如下:
+```asm
+assume cs:code,ss:stack
+stack segment
+dw 0,0,0,0,0,0,0,0,0,0
+stack ends
 
+code segment
+start:  
+    mov ax,stack
+    mov ss,ax
+    mov sp,20
 
-![](/imgs/XXXXXXXXXXX)
+    mov ax,4240h
+    mov dx,000fh
+    mov cx,0ah
+    call divdw
+
+    mov ax, 4C00h
+    int 21h
+
+    ;divdw参数：
+    ;ax: dd型数据低16位
+    ;dx: dd型数据高16位
+    ;cx: 除数
+    ;返回：
+    ;dx:结果高16位，ax:结果低16位，cx:余数
+
+    ;div除法指令规则
+    ;被除数16位，除数8位：被除数ax，除数 (含8位及以内有效数值)寄存器，商al，余数ah
+    ;被除数32位，除数16位：被除数高位dx，低位ax，除数 (含16位及以内有效数值)寄存器，商ax，余数dx
+    ;需优化，最后位数由除数决定，而不是被除数，逻辑错误
+    ;由于最后需要输出32位的数据，所以需要再用一个寄存器，这里引用了和bx类似的si，但是si不可以分为高低9位
+
+    ;mul乘法指令法则
+    ;两个相乘的数，位数需一致
+    ;8位:两个乘数一个在al中，另一个在8位reg或内存字节单元中，结果在ax中
+    ;16位:两个乘数个在ax中，另一个在16位reg或内存字节单元中，结果高位dx，低位ax
+
+divdw:
+    push bx
+    push si
+
+    push ax
+    push cx
+    push dx
+    
+    ;因参数及返回中未用到bx，因此用bx存储结果,修改：因为需返回32位，所以用bx+si返回，bx存储高位，si存储低位
+    ;计算int(H/N)
+    mov ax,dx
+    mov dx,0
+    div cx
+
+    ;商的结果在ax中
+    ;65536b=10000h，
+    ;因为乘数已超4位（即二进制16位），mul指令最多为16*16位，所以不能使用mul指令，改为 使用加法代替乘法
+    ;因为商和余数都不可能大于16位（本质的原因是因为被除数不可能超过32位），所以不用考虑值最后超过32位的情况
+    ;又因为cx最多为16位（二进制），所以先加一次再进行循环
+    ;最终修改的版本为：因为X10000h，相当二进制左移16位，所以这里直接低位数值变高位数值，低位变0
+
+    mov dx,ax
+    mov ax,0
+    ;int(H/N)*65536的值，高位存到dx中，低位存到ax中
+
+    mov bx,dx
+    mov si,ax
+    ;将int(H/N)*65536的值放到bx+si中
+
+    pop dx
+    pop cx
+    pop ax
+    ;上面的计算已改变保存divdw参数的寄存器值，使用recv把原来的值恢复
+
+    push bx
+    push si
+    ;由于接下来的运算需要到ax、dx、cx寄存器，而参数也是存在这些寄存器中，需要再次拿bx、si作数据周转
+    ;因此用栈保存现在bx+si的值，即int(H/N)*65536的值
+
+    mov bx,0
+    mov si,ax
+    ;接下来的运算要用到ax寄存器，所以先保存公式中的L参数。又因为L涉及到32位运算，所以使用bx+si存储L，bx存储高位，si存储低位
+
+    ;计算rem(H/N),取余数
+    mov ax,dx
+    mov dx,0
+    div cx
+    ;余数的结果在dx中
+
+    mov ax,0
+    ;计算rem(H/N)*65536,和计算int(H/N)类似，不再赘述使用加法代替乘法的原因
+    ;通过搜索确定了32位加法中处理进位的方法：低位用add，高位用adc
+    ;再次修改，因65536十六进制为5位，且65536=256^2，所以一次乘法拆为两次
+    ;循环完成后，rem(H/N)*65536的值，高位存到dx中，低位存到ax中
+    
+    add ax,si
+    adc dx,bx
+
+    ;计算rem(H/N)*65536+L,L的值之前已经存到bx+si中，
+    ;操作完成后，rem(H/N)*65536+L的值高位存到dx，低位ax
+
+    div cx
+    ;计算[rem(H/N)*65536+L]/N，商ax，余数dx，在整个公式中，因为int(H/N)*65536低16位为0，所以此时计算出的余数dx即为X/N的余数
+    
+    pop si
+    pop bx
+    ;恢复int(H/N)*65536的值到bx+si中
+
+    push dx 
+    ;将X/N余数压栈
+
+    mov dx,0
+    add ax,si
+    adc dx,bx
+    ;之前int(H/N)*65536的结果存到了 bx：高位，si：低位 中
+    ;计算int(H/N)*65536+[rem(H/N)*65536+L]/N
+    ;最终公式的值存到高位dx，低位ax中
+
+    pop cx
+    ;余数的值赋给cx
+
+    pop si
+    pop bx
+    ret
+
+;prtc:
+    ;push ax
+    ;push cx
+    ;push dx
+    ;ret
+;recv:
+    ;pop dx
+    ;pop cx
+    ;pop ax
+    ;ret
+    ;因为call指令本质上相当于
+    ;"push IP
+    ; jmp near ptr 标号"指令，所以这类需要修改，因为prtc中栈不平衡。
+    ;按我刚开始的代码，本来想着使用call指令尽量减少重复代码，但后来发现栈不平衡，且代码优化后并没有重复很多次，所以废弃了用call调用这几个栈命令的想法
+
+code ends
+end start
+
+```
+实现的过程中发现一些错误，错误及原因、订正方案如下：
+1.某数乘以65536，就相当于二进制数左移16位，用这个角度理解是最方便的，且很直观知道int(H/N)*65536除以16位的数，余数为0。
+  因为65536b=1000h，所以刚开始想的是分两步乘，但走到第二步时发现是32位X32位了，遂放弃。
+2.在使用call+ret组合时，忽略了call指令本质上相当于"push IP;jmp near ptr 标号"指令，需要在call的“函数”中保持栈平衡。
+因为不知道这点，所以想着用call节省"push XXX"这类的语句，未考虑栈平衡。
+3.因为使用div/mul指令时有很多细节，比如位数和指定的寄存器等，所以直接把规则写成注释放代码里了，方便看。
+
+debug截图如下：
+![](/imgs/2025042601.jpg)
+![](/imgs/2025042602.jpg)
