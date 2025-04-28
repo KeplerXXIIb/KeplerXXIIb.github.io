@@ -46,9 +46,12 @@ tags:
     - [实验10](#实验10)
       - [实验内容](#实验内容-11)
       - [实验过程及结论](#实验过程及结论-10)
-    - [实验X](#实验x-1)
+    - [实验11](#实验11)
       - [实验内容](#实验内容-12)
       - [实验过程及结论](#实验过程及结论-11)
+    - [实验X](#实验x-1)
+      - [实验内容](#实验内容-13)
+      - [实验过程及结论](#实验过程及结论-12)
 
 ## 实验来源
 《汇编语言》（第3版，王爽著）P92
@@ -66,6 +69,8 @@ _____________模板
 ### 实验X
 #### 实验内容
 #### 实验过程及结论
+```ams
+```
 1.  
 2.  
 ![](/imgs/XXXXXXXXXXX)
@@ -600,13 +605,13 @@ end start
 
 ### 实验10
 #### 实验内容
-2025042401.jpg
-2025042402.jpg
-2025042403.jpg
-2025042404.jpg
-2025042405.jpg
-2025042406.jpg
-2025042407r.jpg
+![](/imgs/2025042401.jpg)
+![](/imgs/2025042402.jpg)
+![](/imgs/2025042403.jpg)
+![](/imgs/2025042404.jpg)
+![](/imgs/2025042405.jpg)
+![](/imgs/2025042406.jpg)
+![](/imgs/2025042407r.jpg)
 #### 实验过程及结论
 1. 显示字符串
 这里由于之前都写过相关的函数，所以没花多少时间。
@@ -695,9 +700,9 @@ end start
 ```
 实际代码实现后发现个问题，dosbox这显示应该是吞了一行。
 行数1列数3显示如下：
-2025042408.jpg
+![](/imgs/2025042408.jpg)
 行数80列数3显示如下：
-2025042409.jpg
+![](/imgs/2025042409.jpg)
 
 2. 解除除法溢出的问题
 最终代码如下:
@@ -854,9 +859,237 @@ debug截图如下：
 ![](/imgs/2025042601.jpg)
 ![](/imgs/2025042602.jpg)
 
+3. 数值显示
+  将内存中的数值输出到屏幕上的函数之前已经写过，这个子程序难点主要是处理字符串。处理的步骤在教材中已经给出，这里不再赘述。
+  代码如下：
+```asm
+assume cs:code,ds:data,ss:stack,es:data1
+data segment
+dw 123,12666,1,8,3,38,20,13,2
+data ends
+
+data1 segment
+db 32 dup(0)
+data1 ends
+
+stack segment
+dw 8 dup(0)
+stack ends
+
+code segment
+start:  
+    mov ax,data
+    mov ds,ax
+
+    mov ax,stack
+    mov ss,ax
+    mov sp,8
+
+    mov ax,data1
+    mov es,ax
+
+    mov di,0
+    mov si,0
+
+s0: mov ax,ds:[si]
+    mov dx,0
+    mov bx,0
+    ;待补充pop计数
+
+    mov cx,ax
+    jcxz ok1
+    ;判断是否为ds段中的结束标记，如果是，直接开始ok1：显示到屏幕上
+
+s1: mov dx,0
+    mov cx,10
+    div cx
+    ;divdw指令执行后，余数保存在dx中，商保存在ax中
+
+    mov cx,ax
+    ;将商的值放到cx中
+
+    add dx,30H
+    ;计算余数的值的ASCII值
+
+    push dx
+    ;把余数的ASCII值压栈
+
+    inc bx
+    mov cx,ax
+    jcxz ok0
+    ;判断商的值是否为0，如果为0，开始ok0部分
+
+    mov ax,cx
+    jmp short s1
+
+ok0:mov cx,bx
+s2: pop ax
+    ;前面已经判断过需要转换的值是否为0，
+    ;这里到ok行的，都是值不为0的，栈中肯定有数据
+
+    mov byte ptr es:[di],al
+    inc di
+    loop s2
+
+    mov al,20H
+    ;每个数字写入es段后增加空格，空格的ASCII值为32b=20H
+
+    mov byte ptr es:[di],al
+    inc di
+    add si,2
+    jmp short s0
+
+ok1:
+    mov dh,8
+    ;行数
+    mov dl,3
+    ;列号
+    mov cl,2
+    ;属性值
+    
+    mov ax,data1
+    mov ds,ax
+    mov si,0
+    call show_str
+    mov ax, 4C00h
+    int 21h
+
+show_str:
+    push ax
+    push bx
+    push cx
+    push dx
+    push di
+    push si
+
+    mov ax, 0B800h
+    mov es, ax
+
+    ;显示屏幕大小80x25字
+    ;因此，X行Y列在显存中的偏移量（字节）就是(80*(X-1)+Y)*2=(80X+Y-80)*2
+    ;修正，因为行号、列号范围都是从0开始，所以不需要再减1。而且上一个公式，就算行号不减1，列号也应该减，公式错误。
+    ;公式更新为：(80*X+Y)*2
+
+    mov al,80
+    mul dh
+    ;ax=al*dh,ax=80x行号
+
+    mov bl,dl
+    mov bh,0h
+    ;为了可以在寄存器计算，将列号扩充到bx中计算
+
+    add ax,bx
+    add ax,ax
+    ;计算完成后，起始位置（即在显存中的偏移量，单位字节）存到了ax中
+
+    mov di,ax
+    mov si,0
+    mov bl,cl
+    ;等会儿的循环中需要用cx，所以cl的值放到bl中
+write_into:
+    mov cl,ds:[si]
+    mov ch,0
+    ;cl存储字符的ASCII值，bl中存储属性（颜色）值
+
+    jcxz ok
+    mov es:[di],cl
+    mov byte ptr es:[di+1], bl
+    add di,2
+    inc si
+    jmp short write_into
+
+ok: pop si
+    pop di
+    pop dx
+    pop cx
+    pop bx
+    pop ax
+    ret
+
+
+code ends
+end start
+
+```
+程序执行结果如下：
+![](/imgs/2025042801.jpg)
+
+
+### 实验11
+#### 实验内容
+![](/imgs/2025042802.jpg)
+![](/imgs/2025042803.jpg)
+
+#### 实验过程及结论
+这个实验相对比较简单，重点是cmp、jXXX语句的使用，代码如下，过程不再赘述。
+
+```asm
+assume cs:codesg
+datasg segment
+    db "Beginner's All-purpose Symbolic Instruction Code.",0
+datasg ends
+
+stack segment
+    dw 0,0,0,0,0,0,0,0
+stack ends
+
+codesg segment
+begin:
+    mov ax,stack
+    mov ss,ax
+    mov sp,16
+    
+    mov ax,datasg
+    mov ds,ax
+    mov si,0
+    call letterc
+
+    mov ax,4c00h
+    int 21h
+
+letterc:
+    push ax
+    push si
+    push ds
+    mov si,0
+    
+s2: mov al,ds:[si]
+    mov ah,0
+    cmp ax,0
+    je s0
+    ;遇到结束标识符0则直接结束
+
+    cmp ax,61h
+    jb s1
+    cmp ax,7ah
+    ja s1
+    ;根据小写字母ASCII值范围筛选小写字母
+
+    sub ax,20h
+    ;如果是小写字母，则ASCII值减少20h，变为大写
+    mov byte ptr ds:[si],al
+s1: inc si
+    jmp s2
+
+
+s0: pop ds
+    pop si
+    pop ax
+    ret
+
+codesg ends
+end begin
+
+```
+程序执行效果如下：
+![](/imgs/2025042804.jpg)
+
+_____________模板
 ### 实验X
 #### 实验内容
 #### 实验过程及结论
+```ams
+```
 1.  
 2.  
 ![](/imgs/XXXXXXXXXXX)
