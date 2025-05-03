@@ -49,9 +49,15 @@ tags:
     - [实验11](#实验11)
       - [实验内容](#实验内容-12)
       - [实验过程及结论](#实验过程及结论-11)
-    - [实验X](#实验x-1)
+    - [实验12](#实验12)
       - [实验内容](#实验内容-13)
       - [实验过程及结论](#实验过程及结论-12)
+    - [实验13](#实验13)
+      - [实验内容](#实验内容-14)
+      - [实验过程及结论](#实验过程及结论-13)
+    - [实验X](#实验x-1)
+      - [实验内容](#实验内容-15)
+      - [实验过程及结论](#实验过程及结论-14)
 
 ## 实验来源
 《汇编语言》（第3版，王爽著）P92
@@ -1083,6 +1089,106 @@ end begin
 ```
 程序执行效果如下：
 ![](/imgs/2025042804.jpg)
+
+
+### 实验12
+#### 实验内容
+#### 实验过程及结论
+```ams
+assume cs:code
+
+code segment
+start:
+    ;将do0代码复制到0:200处
+    mov ax,cs
+    mov ds,ax
+    mov si,offset do0   ;设置ds:si指向源地址
+    mov ax,0
+    mov es,ax
+    mov di,200h     ;设置es:di指向目的地址
+    mov cx,offset do0end-offset do0     ;设置cx为传输长度
+    cld     ;设置传输方向为正
+    rep movsb
+
+    ;设置中断向量表
+    mov ax,0
+    mov es,ax
+    mov word ptr es:[0*4],200h
+    mov word ptr es:[0*4+2],0
+
+    mov ax,1000h
+    mov bh,1
+    div bh
+    
+    mov ax,4c00h
+    int 21h
+
+do0:jmp short do0start
+    db "divide error!"
+
+
+do0start:  
+    ;显示字符串"divide error!"
+    mov ax,cs
+    mov ds,ax
+    mov si,202h
+
+    mov ax,0b800h
+    mov es,ax
+    mov di,12*160+36*2
+
+    mov cx,13    ;设置cx为传输长度，即字符长度
+s:  mov al,[si]
+    mov es:[di],al
+    mov al,1eh  ;字体属性值：蓝底黄字
+    mov es:[di+1],al
+    inc si
+    add di,2
+    loop s
+
+    mov ax,4c00h
+    int 21h 
+do0end:
+    nop
+
+code ends
+end start
+```
+代码执行效果如下：
+![](/imgs/2025050301.jpg)
+
+在一开始测试0号中断时发现中断程序有些问题，测试的代码如下（除以0会触发0号中断）
+```ams
+assume cs:code;ss:stack
+code segment
+start:
+    mov ax,1000h
+    mov bh,0
+    div bh
+    
+    mov ax,4c00h
+    int 21h
+code ends
+end start
+```
+执行后结果如下图所示：
+![](/imgs/2025050304.jpg)
+使用debug查看0000:0000（存放中断向量表的位置），然后查看前两个中断向量及相应的中断程序，
+发现和刚才测试的代码一致，还发现了中断返回指令"iret"，如下图所示：
+![](/imgs/2025050302.jpg)
+![](/imgs/2025050303.jpg)
+这说明，dosbox是模拟了中断过程的，且中断向量的存放地址就是放在默认的0000:0000，但是中断程序没有模拟，只有几行意义不明的语句。
+因为“探测中断-中断触发-寻找中断向量-执行中断程序”的链条中，只有中断程序没模拟，所以只要我们把自定义中断程序并将其放到指定的内存位置，那么实验12就可以顺利完成。
+
+_____________模板
+### 实验13
+#### 实验内容
+#### 实验过程及结论
+```ams
+```
+1.  
+2.  
+![](/imgs/XXXXXXXXXXX)
 
 _____________模板
 ### 实验X
