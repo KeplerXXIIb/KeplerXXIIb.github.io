@@ -55,9 +55,15 @@ tags:
     - [实验13](#实验13)
       - [实验内容](#实验内容-14)
       - [实验过程及结论](#实验过程及结论-13)
-    - [实验X](#实验x-1)
+    - [实验14](#实验14)
       - [实验内容](#实验内容-15)
       - [实验过程及结论](#实验过程及结论-14)
+    - [实验15](#实验15)
+      - [实验内容](#实验内容-16)
+      - [实验过程及结论](#实验过程及结论-15)
+    - [实验X](#实验x-1)
+      - [实验内容](#实验内容-17)
+      - [实验过程及结论](#实验过程及结论-16)
 
 ## 实验来源
 《汇编语言》（第3版，王爽著）P92
@@ -1093,6 +1099,7 @@ end begin
 
 ### 实验12
 #### 实验内容
+![](/imgs/2025050601.jpg)
 #### 实验过程及结论
 ```ams
 assume cs:code
@@ -1183,12 +1190,213 @@ end start
 _____________模板
 ### 实验13
 #### 实验内容
+![](/imgs/2025050602.jpg)
+![](/imgs/2025050603.jpg)
+![](/imgs/2025050604.jpg)
+#### 实验过程及结论
+实验13的3个子实验难度不大，子程序都可在该章中找到代码，实验详细过程不再赘述。
+1. 代码如下
+```asm
+assume cs:code
+code segment
+
+start:
+    mov ax,cs
+	mov ds,ax
+	mov si,offset show_str
+	mov ax,0
+	mov es,ax
+	mov di,200h
+	mov cx,offset show_str_end - offset show_str
+	cld
+	rep movsb
+
+	mov ax,0
+	mov es,ax
+	mov word ptr es:[7ch*4],200h
+	mov word ptr es:[7ch*4+2],0
+
+	mov ax,4c00h
+	int 21h
+
+show_str:  
+    ;显示字符串
+    ;参数：dh=行号，dl=列号，cl=颜色，ds:si指向字符串首地址
+
+    push ax
+    push cx
+    push dx
+    push ds
+    push es
+    push si
+    push di
+
+    mov ax,0b800h
+    mov es,ax
+    ;起始位置为(80*X+Y)*2，X为行号，Y为列号
+    ;使用加法代替乘法
+    ;（此处仅考虑一页，即一个屏幕大小的区域）
+    ;因为最大行号为25，最大列号80，25*160+80*2=4160，2^9=512,所以需要16位寄存器表示
+    mov al,160
+    mul dh
+    ;dh*160的值存到ax中
+    mov dh,0
+    add dx,dx
+    add ax,dx
+    ;ax=(80*X+Y)*2
+
+    mov di,ax
+    
+s:  mov al,ds:[si]
+    cmp al,0
+    je ok
+    mov es:[di],al
+    mov es:[di+1],cl
+    inc si
+    add di,2
+    jmp s
+    
+ok: 
+    pop di
+    pop si
+    pop es
+    pop ds
+    pop dx
+    pop cx
+    pop ax
+    iret
+show_str_end:
+    nop
+
+code ends
+end start
+
+```
+2. 代码如下
+```asm
+assume cs:code
+code segment
+
+start:
+    mov ax,cs
+	mov ds,ax
+	mov si,offset lp
+	mov ax,0
+	mov es,ax
+	mov di,200h
+	mov cx,offset lp_end - offset lp
+	cld
+	rep movsb
+
+	mov ax,0
+	mov es,ax
+	mov word ptr es:[7ch*4],200h
+	mov word ptr es:[7ch*4+2],0
+
+	mov ax,4c00h
+	int 21h
+
+
+lp: 
+    ;cx=循环次数，bx=位移
+    push bp
+    mov bp,sp
+    dec cx
+    jcxz lpret
+    add [bp+2],bx
+lpret:
+    pop bp
+    iret
+lp_end:
+    nop
+
+code ends
+end start
+
+```
+3. 省略
+
+
+### 实验14
+#### 实验内容
+![](/imgs/2025050605.jpg)
+#### 实验过程及结论
+实验14，相应模块教材中都有代码，详细过程不再赘述
+代码如下：
+```ams
+;编程：在屏幕中间显示当前的月份
+
+assume cs:code
+d1 segment
+      db "YY/MM/DD HH:MM:SS",0
+d1 ends
+
+d2 segment
+      db 9,8,7,4,2,0,88
+d2 ends
+
+code segment
+start:
+      mov ax,d1
+      mov ds,ax
+      mov ax,d2
+      mov es,ax
+      mov si,0
+      mov di,0
+
+s:    mov al,es:[di]
+      cmp al,88
+      je ok
+      out 70h,al
+      in al,71h
+      ;向地址端口70h写入要访问的单元地址
+      ;从数据端口71h取得指定单元的数据
+
+      mov ah,al
+      mov cl,4
+      shr ah,cl
+      and al,00001111b
+
+      add ah,30h
+      add al,30h
+      mov byte ptr ds:[si],ah
+      mov byte ptr ds:[si+1],al
+
+      add si,3
+      inc di
+      jmp s
+ok:   mov ax,0b800h
+      mov es,ax
+      mov di,160*12+40*2
+      mov si,0
+      mov ah,2
+
+s1:   mov al,ds:[si]
+      cmp al,0
+      je ok1
+      mov byte ptr es:[di],al
+      mov byte ptr es:[di+1],ah
+      inc si
+      add di,2
+      jmp s1
+ok1:  mov ax,4c00h
+      int 21h
+
+code ends
+end start
+```
+实验结果截图如下：
+![](/imgs/2025050606.jpg)
+
+### 实验15
+#### 实验内容
 #### 实验过程及结论
 ```ams
 ```
 1.  
 2.  
 ![](/imgs/XXXXXXXXXXX)
+
 
 _____________模板
 ### 实验X
