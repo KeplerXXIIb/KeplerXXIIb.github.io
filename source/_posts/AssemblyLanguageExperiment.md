@@ -61,9 +61,12 @@ tags:
     - [实验15](#实验15)
       - [实验内容](#实验内容-16)
       - [实验过程及结论](#实验过程及结论-15)
-    - [实验X](#实验x-1)
+    - [实验16](#实验16)
       - [实验内容](#实验内容-17)
       - [实验过程及结论](#实验过程及结论-16)
+    - [实验X](#实验x-1)
+      - [实验内容](#实验内容-18)
+      - [实验过程及结论](#实验过程及结论-17)
 
 ## 实验来源
 《汇编语言》（第3版，王爽著）P92
@@ -1390,13 +1393,93 @@ end start
 
 ### 实验15
 #### 实验内容
+![](/imgs/2025050701.jpg)
+![](/imgs/2025050702.jpg)
+
+#### 实验过程及结论
+代码如下，教材中有相应模块的代码，只需要简单地修改即可完成实验。
+```ams
+assume cs:code
+
+stack segment
+ db 128 dup (0)
+stack ends
+
+code segment
+start:	mov ax,stack
+	mov ss,ax
+	mov sp,128
+
+	push cs
+	pop ds
+
+	mov ax,0
+	mov es,ax
+
+	mov si,offset int9			;设置ds:si指向源地址
+	mov di,204h				;设置es:di指向目的地址
+	mov cx,offset int9end - offset int9	;设置cx为传输长度
+	cld					;设置传输方向为正
+	rep movsb	
+
+	push es:[9*4]
+	pop es:[200h]
+	push es:[9*4+2]
+	pop es:[202h]
+
+	cli
+	mov word ptr es:[9*4],204h
+        mov word ptr es:[9*4+2],0
+	sti
+	
+	mov ax,4c00h
+	int 21h
+
+
+ int9:	push ax
+	push bx
+	push cx
+	push es
+        
+	in al,60h
+
+	pushf        
+        call dword ptr cs:[200h] 	;当此中断例程执行时(CS)=0
+	cmp al,9eh			;A的扫描码为1Eh，断码为1Eh+80h=9eh
+	jne int9ret
+	mov ax,0b800h
+	mov es,ax
+	mov bx,0
+	mov cx,2000
+s:	
+	mov byte ptr es:[bx],'A'
+	add bx,2
+	loop s
+
+int9ret:pop es
+	pop cx
+	pop bx
+	pop ax
+	iret
+
+int9end:nop
+
+code ends
+end start
+
+```
+实验效果图如下：
+![](/imgs/2025050703.gif)
+
+_____________模板
+### 实验16
+#### 实验内容
 #### 实验过程及结论
 ```ams
 ```
 1.  
 2.  
 ![](/imgs/XXXXXXXXXXX)
-
 
 _____________模板
 ### 实验X
