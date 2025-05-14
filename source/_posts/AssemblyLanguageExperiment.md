@@ -64,9 +64,12 @@ tags:
     - [实验16](#实验16)
       - [实验内容](#实验内容-17)
       - [实验过程及结论](#实验过程及结论-16)
-    - [实验X](#实验x-1)
+    - [实验17](#实验17)
       - [实验内容](#实验内容-18)
       - [实验过程及结论](#实验过程及结论-17)
+    - [实验X](#实验x-1)
+      - [实验内容](#实验内容-19)
+      - [实验过程及结论](#实验过程及结论-18)
 
 ## 实验来源
 《汇编语言》（第3版，王爽著）P92
@@ -1468,11 +1471,238 @@ code ends
 end start
 
 ```
-实验效果图如下：
-![](/imgs/2025050703.gif)
+
+### 实验16
+#### 实验内容
+![](/imgs/2025051408.jpg)
+#### 实验过程及结论
+做实验16时遇到一些小问题，在安装完中断例程后，在调用中断后，使用中断中的call指令调用其它程序（严格来说不是其它程序，是中断例程中的其它行的代码）。
+通过debug调试发现，这是因为中断例程中的代码，使用直接定址表时，无法跳回到正确的内存地址。原因是：
+汇编代码是转换成机器码放到内存中的，当其从一个内存地址复制到另一个内存地址时，譬如直接定址表语句"table dw sub1,sub2,sub3,sub4"
+或者使用到偏移（如"offset sub1）等语句，在新的内存地址调用时，其偏移的值还是原来的值。如果代码放的新地址，初始偏移和原偏移不一致，那么类似的通过地址偏移定址的语句就会发生错误。为了防止出现该错误，本实验代码中采取了两个修改措施：1.直接修改直接定址表中的内容2.在代码中使用“基址+偏移”方法定址时，直接加上新地址与原地址的偏移量之差。
+```ams
+;安装新的int7ch中断例程
+assume cs:code
+code segment
+;子程序setscreen，为显示输出提供如下功能：
+;(1) 清屏。
+;(2) 设置前景色。
+;(3) 设置背景色。
+;(4) 向上滚动一行。
+;
+;入口参数说明：
+;(1) 用 ah 寄存器传递功能号：0 表示清屏，1表示设置前景色，2 表示设置背景色，3 表示向上滚动一行；
+;(2) 对于1、2号功能，用 al 传送颜色值，(al) ∈{0,1,2,3,4,5,6,7}
+
+setscreen: 
+	jmp short set
+	;子程序地址保存到table中
+    table dw sub1,sub2,sub3,sub4
+
+set:push bx  
+	cmp ah,3		;判断传递的是否大于 3
+	ja sret
+	mov bl,ah
+	mov bh,0
+	add bx,bx		;根据ah中的功能号计算对应子程序的地址在table表中的偏移
+	; debug
+	; 查看为什么cs:table[bx]调用失败（未转换到指定偏移值）
+; debuggg1:
+; 	push dx
+; 	mov dx,word ptr table[bx]
+; 	mov dx,word ptr cs:table[bx]
+; 	mov dx,offset table
+; 	mov dx,offset sub1
+; 	mov dx,offset sub2
+; 	pop dx
+; debuggg1_end:
+	;虽然在ept161中已经将table[bx]的值相应地修改，但是在这个中断例程中直接调用table时（即offset table的值），偏移值仍是原来的0002h。
+	call word ptr cs:table[bx+200h]
+
+sret:
+	pop bx	
+	iret
+
+;功能子程序1：清屏
+sub1:   push bx
+		push cx
+        push es
+        mov bx,0b800h
+        mov es,bx
+        mov bx,0
+        mov cx,2000
+sub1s:  mov byte ptr es:[bx],' '
+        add bx,2
+        loop sub1s
+        pop es
+        pop cx
+        pop bx
+	ret ;sub1 ends
+
+;功能子程序2：设置前景色
+sub2:	
+	push bx
+	push cx
+	push es
+
+	mov bx,0b800h
+	mov es,bx
+	mov bx,1
+	mov cx,2000
+sub2s:	
+	and byte ptr es:[bx],11111000b	
+	or es:[bx],al 
+	add bx,2
+	loop sub2s
+
+	pop es
+	pop cx
+	pop bx
+	ret ;sub2 ends
+
+;功能子程序3：设置背景色
+sub3:	
+	push bx
+	push cx
+	push es
+	mov cl,4
+	shl al,cl
+	mov bx,0b800h
+	mov es,bx
+	mov bx,1
+	mov cx,2000
+sub3s:	
+	and byte ptr es:[bx],10001111b
+	or es:[bx],al 
+	add bx,2
+	loop sub3s
+
+	pop es
+	pop cx
+	pop bx
+	ret ; sub3 ends
+
+;功能子程序4：向上滚动一行
+sub4:	
+	push cx
+	push si
+	push di
+	push es
+	push ds
+
+	mov si,0b800h
+	mov es,si
+	mov ds,si
+	mov si,160			;ds:si指向第n+1行
+	mov di,0			;es:di指向第n行
+	cld
+	mov cx,24;共复制24行
+
+sub4s:	
+	push cx
+	mov cx,160
+	rep movsb 			;复制
+  	pop cx
+	loop sub4s
+
+	mov cx,80	
+	mov si,0
+sub4s1: 
+	mov byte ptr es:[160*24+si],' '		;最后一行清空
+	add si,2
+	loop sub4s1
+
+	pop ds
+	pop es
+	pop di
+	pop si
+	pop cx
+	ret ;sub4 ends
+
+setscreen_end:
+    nop
+start:
+    mov ax,cs
+	mov ds,ax
+	mov si,offset setscreen
+	mov ax,0
+	mov es,ax
+	mov di,200h
+	mov cx,offset setscreen_end - offset setscreen
+	cld
+	rep movsb
+
+	; debug
+ 	; 查看代码复制情况
+	; 这里卡了一天多用debug看值才找到问题哈哈哈哈，
+	; table和screen之间也是有距离的，之前一直只考虑了200h，其实偏移还要加上offset table - offset setscreen
+	; 问题点不难但是找的过程中有点轴，纪念一下（狗头
+
+; debuggg:
+; 	push ax
+; 	push bx
+; 	push cx
+
+; 	mov bx,0
+; 	mov cx,4
+; tt:
+; 	mov ax,word ptr cs:table[bx]
+; 	mov ax,word ptr es:[200h + (offset table - offset setscreen) + bx]
+; 	mov ax,offset table - offset setscreen
+; 	add bx,2
+; 	loop tt
+
+; 	pop cx
+; 	pop bx
+; 	pop ax
+; debuggg_end:
+; 	nop
+
+adjust_table:
+	push ax
+	push bx
+	push cx
+	push es
+
+	mov ax,0
+	mov es,ax
+	mov bx,0
+	mov cx,4
+	mov ax,200h
+	sub ax,offset setscreen
+s:	add word ptr es:[200h + (offset table - offset setscreen) + bx],ax
+	add bx,2
+	loop s
+
+	pop es
+	pop cx
+	pop bx
+	pop ax
+adjust_end:
+	nop
+
+	cli
+	mov word ptr es:[7ch*4],200h
+	mov word ptr es:[7ch*4+2],0
+	sti
+
+	mov ax,4c00h
+	int 21h
+
+code ends
+end start
+```
+红色的汇编原码，转换成的机器码，如图所示，这里不再解释机器码的意义，反正复制到新地址后，执行该语句，得到的值仍是原来的偏移。
+![](/imgs/2025051403.jpg)
+实验中0、1、2、3号功能效果依次如下图所示：
+![](/imgs/2025051404.jpg)
+![](/imgs/2025051405.jpg)
+![](/imgs/2025051406.jpg)
+![](/imgs/2025051407.jpg)
+
 
 _____________模板
-### 实验16
+### 实验17
 #### 实验内容
 #### 实验过程及结论
 ```ams
