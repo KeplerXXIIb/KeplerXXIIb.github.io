@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   
-  <title>今日，用AI大模型有感而发Some thoughts. - KeplerXXIIb</title>
+  <title>学习编译原理与汇编！ - KeplerXXIIb</title>
   
     <link rel="shortcut icon" href="/favicon.png">
   
@@ -16,15 +16,15 @@
   
   
   
-  <meta property="og:title" content="今日，用AI大模型有感而发Some thoughts. - KeplerXXIIb" />
+  <meta property="og:title" content="学习编译原理与汇编！ - KeplerXXIIb" />
   
   <meta property="og:type" content="article" />
   
-  <meta property="og:url" content="http://example.com/2024/06/26/SomeThoughts/index.html" />
+  <meta property="og:url" content="http://example.com/2025/03/27/LearningCompilationPrinciple&amp;AssemblyLanguage/index.html" />
   
-  <meta property="og:image" content="/imgs/20240626007.jpeg" />
+  <meta property="og:image" content="/imgs/20250327-2.jpg" />
   
-  <meta property="og:article:published_time" content="2024-06-26T00:00:00.000Z" />
+  <meta property="og:article:published_time" content="2025-03-27T00:00:00.000Z" />
   
   <meta property="og:article:author" content="KeplerXXIIb" />
   
@@ -160,45 +160,27 @@
 
         
         <div class="date" id="date">
-            <span>June</span>
-            <span>26,</span>
-            <span>2024</span>
+            <span>March</span>
+            <span>27,</span>
+            <span>2025</span>
         </div>
         
 
-        <h1 class="title">今日，用AI大模型有感而发Some thoughts.</h1>
+        <h1 class="title">学习编译原理与汇编！</h1>
     </div>
 
     <div class="divider"></div>
 
     <div class="content">
-        <p>今天用某大厂的AI大模型时，遇到了个bug。我属实是没想到大厂会出这种bug，而且过了一早上才修复好的，害。</p>
-<p>问题描述：<br>该模型，我的账号下，有个优惠卡权益被自动激活，该优惠卡的使用时间是晚上。<br><img src="/imgs/20240626001.png"></p>
-<p>该模型现在是免费的，按理来说，能全时段一直使用。但是今早登录却报错，“晚上才能用”。<br><img src="/imgs/20240626002.png"><br>我推测，应该是用户权限出了问题，按理来说，应该是所有的权限（免费）并上优惠卡的权限，最后是所有时段都能用，但是现在变成了只能晚上用，估计是宣布功能免费的时候，系统层面直接将免费版的功能直接赋给所有用户了，而不是单独设置了角色然后给各用户赋角色。(经常用的人应该一眼就能看出这UI是哪家哈哈哈)。</p>
-<p>这个bug应该是到中午才解决的（我没有一直跟踪，反正午饭前试了下没好，下午2点多尝试的时候发现恢复正常了）。我搜了下，发现贴吧上很多人都在反映这个情况，说明这个bug应该是全局的，影响到了很多用户。<br><img src="/imgs/20240626008.png"><br>虽然目前AI大模型还没有很“硬核”的应用落地，但是这样的问题让用户有半天的时间没法用，个人认为不是个小问题。<br>而且还有个问题就是反馈渠道不健全。在该应用官网除了一个邮箱，我没找到其他有效的反馈渠道，而且早上我写了邮件，直到晚上11点都没人回。那个“意见反馈”栏，填多少也没人理。只能说，该厂该项目的项目经理，要么钱给少了，要么功夫没到家，哈哈，用户反馈的渠道都没搭好，挺离谱的。</p>
-<p>所以，大厂有时候也不一定能“保证质量”。可能这和企业文化有关系哈哈，是该对各类大厂、“权威”祛祛魅了。</p>
-<p>我觉着，该厂的项目经理A，在他&#x2F;她的脑海里，用户可能是这样的：</p>
+        <h2 id="题目来源"><a href="#题目来源" class="headerlink" title="题目来源"></a>题目来源</h2><p>最近在自学编译原理和汇编，在做清华大学汇编语言网课的时候遇到一题练习题感觉出得不错，在此记录一下题目及解题过程。</p>
 <blockquote>
-<p>使用产品之前熟读“用户手册”，使用产品起来游刃有余，在遇到一些问题时（一般是遇到技术问题或者有建议），会通过“反馈”的渠道反馈给后台。<br>我觉着文中开头提到的大厂的PM，估计就是A这种类型的。<br>可以去看下这个有bug的大厂的AI大模型UI，它只有一个孤零零的“反馈”界面。用户反馈&#x2F;求助的界面，除了这个提交框，下面一串邮箱，其他毛也没有。这个提交框你提交100次，也没人理，用户体验较差。<br><img src="/imgs/20240626006.png"></p>
+<p>来源：清华大学网课“汇编语言程序设计”<br><a target="_blank" rel="noopener" href="https://www.xuetangx.com/learn/THU08091000320/THU08091000320/23894976/exercise/58105728?channel=i.area.manual_search">https://www.xuetangx.com/learn/THU08091000320/THU08091000320/23894976/exercise/58105728?channel=i.area.manual_search</a></p>
+<p>题目：<br>有如下的C代码以及对应的反汇编出来的汇编代码（x86-32体系结构）：<br>当strcpy调用完成返回到foo过程时，buf[0]、buf[1]、buf[2]的值分别是多少?<br>在执行0x0804850d的ret指令前（popl后），ebp的值是多少？<br>上述ret指令执行后，eip的值是多少？<br>用32位16进制表示，注意大小端。e.g. 0x00000000 字符的十六进制转换表已给出<br><img src="/imgs/20250327-1.jpg"><br><img src="/imgs/20250327-3.jpg"><br><img src="/imgs/20250327-2.jpg"></p>
 </blockquote>
-<p>个人认为，很多时候，对于某产品，用户不是所有功能都懂了才使用的，而是边使用产品边学习如何使用，即边用边学。<br>如果产品设计者能够在用户觉得不知道如何使用、有疑问时，及时给出指引，那么用户的体验会很好。<br>对于AI知识大模型（此处只指中的此类应用（问答型，没有很高的使用门槛）而言，当遇到问题时，用户一般会选择直接问客服来获得解决方案，而不是自己去翻看又臭又长的用户手册。<br>且当遇到系统bug等需要产品设计者解决的问题时，如果能得到及时的处理（得到反馈），那么用户对该产品的好感也会倍增。</p>
-<p>这里想点名说下鹅厂的设计哈哈。<br>感觉鹅厂的PM和刚才例子中的PM就不太一样，其更会“宠客户”，或者说更有“用户思维”。打开鹅厂的AI大模型应用网页“元宝”（刚开始腾讯只有“混元”，现在孵化出了“元宝”、“元器”），示例如下：</p>
-<blockquote>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>看完题目后，思路就是，按照程序执行步骤一步一步推演。本来想的是把推演过程写成图文形式的，但后来发现做成gif可能更直观些。</p>
+<h2 id="程序执行过程演示图"><a href="#程序执行过程演示图" class="headerlink" title="程序执行过程演示图"></a>程序执行过程演示图</h2><blockquote>
+<p><img src="/imgs/20250327-4.gif"></p>
 </blockquote>
-<p>这里是“元宝”的“反馈”界面。<br><img src="/imgs/20240626003.png"><br><img src="/imgs/20240626004.png"><br><img src="/imgs/20240626005.png"></p>
-<p>在“元宝”的反馈界面，第一行是用户常见的热门问题，然后是元宝的介绍及使用方法，后面是问题的大分类。右边才是之前项目经理A的中“反馈”板块的内容（技术问题或建议）。点开“发送反馈”或者“在线客服”按钮，都会链接到专门的客服平台。<br>以上足以看出鹅厂PM对用户画像拿捏得精准：</p>
-<ol>
-<li>用户们几乎都是边用边学；</li>
-<li>用户反馈时，大部分是因为遇到些小问题，很小概率是遇到需要后台解决的系统问题或者提建议</li>
-</ol>
-<p>所以相应设计的也是：</p>
-<ol>
-<li>反馈界面点进来就是”热门问题“</li>
-<li>为了方便检索，专门添加了问题大类，方便直接查询</li>
-<li>对于发生频率较低的特殊问题反馈及建议反馈，在右边链接了专属客服平台</li>
-</ol>
-<p>这用户体验，搁谁谁不舒服啊，是不是？和刚才项目经理A的例子可谓是一个天上一个地下。</p>
-<p>希望两家都做得越来越好~</p>
 
     </div>
 
@@ -219,13 +201,22 @@
     
 
     <div class="container post-prev-next">
-        <a class="next"></a>
         
-        <a href="/2024/06/11/OptimizationOfBlogDeployment/" class="prev">
+        <a href="/2025/04/16/AssemblyLanguageExperiment/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">汇编语言实验过程记录202504（已完结）</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/2024/08/30/LazinessIsProductivity!/" class="prev">
             <div>
                 <div class="text">
                     <p class="label">Previous</p>
-                    <h3 class="title">记一次对个人博客(主题+素材部署）的优化Optimization Of Blog Deployment</>
+                    <h3 class="title">懒惰也是种生产力！记对PowerShell脚本的初体验</>
                 </div>
             </div>
         </a>
@@ -284,7 +275,7 @@
             </div>
             
         </div>
-        <span>&copy; 2024 KeplerXXIIb<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        <span>&copy; 2025 KeplerXXIIb<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
         
         
             <br>
