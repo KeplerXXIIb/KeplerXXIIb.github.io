@@ -6,10 +6,13 @@ categories: tech-blog
 tags:
   - CS
 ---
+
+![](/imgs/XXXXXXXXXXX)
+
 # 目录
 ## 学习资料来源
-江协科技 https://jiangxiekeji.com
-b站视频 https://www.bilibili.com/video/BV1Mb411e7re/?vd_source=5e2a8b05cdeecce93e566eee1d4ecbea
+https://jiangxiekeji.com
+https://www.bilibili.com/video/BV1Mb411e7re/?vd_source=5e2a8b05cdeecce93e566eee1d4ecbea
 
 ## 学习准备
 ### 开发工具介绍及软件安装
@@ -28,11 +31,12 @@ b站视频 https://www.bilibili.com/video/BV1Mb411e7re/?vd_source=5e2a8b05cdeecc
 ​​“51单片机”​​ 得名于英特尔经典的 ​​MCS-51​​ 微控制器系列，特指所有使用​​8051兼容内核​​的微控制器。
 它是一个​​技术架构的代名词​​，而非某个特定型号的芯片。
 由于其​​结构经典、生态完善、成本低廉​​，至今仍在嵌入式领域占据重要地位，是初学者入门嵌入式系统的绝佳选择之一。
-![](/imgs/XXXXXXXXXXX)
+
 ### 单片机及开发板介绍
 所见即所得，各模块简单介绍
 ![](/imgs/2025101905.jpg)
 
+（顺序：从右上角灯组开始顺时针介绍）
 LED灯组
 矩阵按键
 红外接收头
@@ -323,6 +327,25 @@ I2C电路规范
 之前实现按键的功能（检测、消抖等），是通过CPU等待来实现的，当此类需要检测的函数多了之后，这个方案便需要优化。
 
 使用定时器来检测按键按下/恢复，设置间隔为20ms后，不管开始检测时时间点在哪个位置，只要检测电位的变化，然后根据变化就可以看出是按下/按住/恢复
+
+### DS18B20温度传感器
+寄生供电
+
+### 直流电机介绍
+直流电机
+步进电机
+舵机
+无刷电机
+空心杯电机
+
+惯性系统 PWM脉冲宽度调制
+
+许多新的单片机用硬件来实现PWM功能
+
+### AD/DA，模数/数模转换
+
+### 红外遥控简介
+NEC标准
 
 
 
