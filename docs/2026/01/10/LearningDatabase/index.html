@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>学习数据库 - KeplerXXIIb</title>
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="学习数据库 - KeplerXXIIb" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="http://example.com/2026/01/10/LearningDatabase/index.html" />
+  
+  <meta property="og:image" content="/imgs/2026011007.png" />
+  
+  <meta property="og:article:published_time" content="2026-01-10T00:00:00.000Z" />
+  
+  <meta property="og:article:author" content="KeplerXXIIb" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="2"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Blog</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">Friends</a>
+            
+            
+            
+            <a class="nav-item" href="/projects">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/KeplerXXIIb" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="/codepan" target="_blank" aria-label="CodePen">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="/patreon" target="_blank" aria-label="Patreon">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-mastodon nav-item-icon" href="/mastodon" target="_blank" aria-label="Mastodon">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="/discord" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/tech-blog/">tech-blog</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>January</span>
+            <span>10,</span>
+            <span>2026</span>
+        </div>
+        
+
+        <h1 class="title">学习数据库</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h2><p>去年年末，想找实习，以我现在的知识，勉强只能做简单的数据分析相关的岗位，遂准备“临时抱佛脚”，回顾下SQL语句。<br>为了联系SQL，在本地（Windows）部署了Mysql服务器。令人意外又在情理之中的是，一个实习都没找到哈哈哈哈，就业市场果然已经不复当年模样。<br>按照原来的规划，最近准备学数据库相关的知识，然后准备再次练习SQL语句，但发现已经忘记了本地的密码……</p>
+<h2 id="重装MYSQL！"><a href="#重装MYSQL！" class="headerlink" title="重装MYSQL！"></a>重装MYSQL！</h2><p>于是乎，我打开了腾讯元宝，开始搜索如何找回密码。找到了一个看起来还靠谱的博客，然后开始操作起来。<br><img src="/imgs/2026011004.png"><br>结果第一二个办法尝试下来，全没用，为啥呢？原因也很简单，还没开始就已经结束了。每次我在服务中打开mysql的服务后，一刷新，就发现它自动停止了。我一直没找到原因，所以前两个办法就没用处了。<br><img src="/imgs/2026011005.png"><br>然后我准备直接第三个办法，卸载重装。结果重装完，打开安装向导时发现了报错，到这儿的时候我没想着写blog，就没截图。于是我又再次卸载了。<br>不服气的我又找了几个帖子准备开搞。<br>在搜索了这个服务自动停止的原因之后，我开始逐一排除。<br><img src="/imgs/2026011006.png"><br>我是在D盘安装MYSQL的，在清理了软件的安装目录、注册表等之后，我还是不放心，准备在C盘也搜索一下，结果在”C:\ProgramData&quot;路径下搜索时，发现了一些端倪，我搜到了MYSQL软件崩溃的日志，然后发现我没有权限打开。<br><img src="/imgs/2026011002.png"><br><img src="/imgs/2026011003.png"><br>除此之外，我还通过任务管理器找到了一个被挂起的MYSQL的进程，发现无法强制结束它。<br>一开始我是在任务管理器那个界面操作“结束进程”的，结果它只提醒我无法结束，即便我用管理员身份操作也是这样（这里报错我没有截图），<br>然后我又在命令行里试了下，同样提示不可操作，但是显示了原因“该进程是其他进程的子进程”。<br>（这里可以看出，任务管理器虽然方便，虽然随着版本更新UI越来越好看，但是一些细节的提示信息，还是在命令行里才会显示，所以在debug的过程中，虽然UI界面也很方便，但不要忘了利用命令行工具）<br><img src="/imgs/2026011001.png"><br>然后我发现这个父进程已经消失了（见上图），因为此时我已经将MYSQL卸载了，所以我猜测这个进程被挂起的过程大概是这样的：<br>MYSQL的某进程调用了该进程，由于程序崩溃，所以这个子进程被挂起，在崩溃还没被处理之前，MYSQL被卸载，导致这个进程就这样卡在了这里。<br>想到这儿，我想着，重启一下，OS应该会清理这些进程，这样的话我重新安装就没问题了。<br>我是先把关机后开机，然后再次安装，发现还是有问题，这时候我怀疑是联想拯救者这个系列的问题，因为之前我有看到过，它有一个快速启动功能，这个功能简单来说呢，就是关机的时候，有一些数据直接保留，这样开机的时候不用再次初始化，开机速度就会很快。<br>我在设置里找了半天没有发现关闭“快速启动功能”的地方。这时候我纳闷了，莫非没有办法了吗？难道联想电脑设计者这么拉胯吗？这时我又想，要不试一下“重启”按钮，结果我一试，发现ok了。<br>我一直以为，关机后再开机（冷启动），重启（热启动），软件都是要重启的。我猜想，有可能是联想为了追求快速开机，关机的时候，有一些软件的数据直接保存了，没有重新启动，所以才有了这次的问题。<br>当然，这个“快速启动”也有可能是windows新版本的设计，这里我没有再深究了。</p>
+
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by KeplerXXIIb, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/CS/" class="tag">#CS</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        <a class="next"></a>
+        
+        <a href="/2025/12/26/SomethingRecent1/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">最近的一些事</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Blog</h2>
+                
+                <a href="/" class="item">Blog</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+                <a href="/search" class="item">Search</a>
+                
+                <a href="/friends" class="item">Friends</a>
+                
+                <a href="/projects" class="item">Projects</a>
+                
+                <a href="/resume" class="item">Resume</a>
+                
+                <a href="/about" class="item">About</a>
+                
+                <a href="/atom.xml" class="item">RSS</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Projects</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/KeplerXXIIb/CS-Learning" class="item">C-Learning</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/KeplerXXIIb" class="item">GitHub</a>
+                
+                <a href="QQ:936474910@qq.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2026 KeplerXXIIb<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

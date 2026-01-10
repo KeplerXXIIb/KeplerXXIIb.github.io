@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>51单片机学习记录 - KeplerXXIIb</title>
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="51单片机学习记录 - KeplerXXIIb" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="http://example.com/2025/10/18/LearningLogOf51MCU/index.html" />
+  
+  <meta property="og:image" content="/imgs/XXXXXXXXX.jpg" />
+  
+  <meta property="og:article:published_time" content="2025-10-18T00:00:00.000Z" />
+  
+  <meta property="og:article:author" content="KeplerXXIIb" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="2"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Blog</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">Friends</a>
+            
+            
+            
+            <a class="nav-item" href="/projects">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/KeplerXXIIb" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="/codepan" target="_blank" aria-label="CodePen">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="/patreon" target="_blank" aria-label="Patreon">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-mastodon nav-item-icon" href="/mastodon" target="_blank" aria-label="Mastodon">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="/discord" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/tech-blog/">tech-blog</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>October</span>
+            <span>18,</span>
+            <span>2025</span>
+        </div>
+        
+
+        <h1 class="title">51单片机学习记录</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <p><img src="/imgs/XXXXXXXXXXX"></p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="学习资料来源"><a href="#学习资料来源" class="headerlink" title="学习资料来源"></a>学习资料来源</h2><p><a target="_blank" rel="noopener" href="https://jiangxiekeji.com/">https://jiangxiekeji.com</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Mb411e7re/?vd_source=5e2a8b05cdeecce93e566eee1d4ecbea">https://www.bilibili.com/video/BV1Mb411e7re/?vd_source=5e2a8b05cdeecce93e566eee1d4ecbea</a></p>
+<h2 id="学习准备"><a href="#学习准备" class="headerlink" title="学习准备"></a>学习准备</h2><h3 id="开发工具介绍及软件安装"><a href="#开发工具介绍及软件安装" class="headerlink" title="开发工具介绍及软件安装"></a>开发工具介绍及软件安装</h3><p>硬件：51单片机开发板、Windows电脑<br>软件：Keil5、STC-ISP、ch341ser（开发板驱动）</p>
+<blockquote>
+<p>Keil&#x2F;IAR 是功能强大的集成开发环境，而 STC-ISP 的核心是一个专用于 STC 系列 8051 内核单片机的程序烧录工具。<br>烧录、刻录，write、program、burn</p>
+</blockquote>
+<blockquote>
+<p>.hex文件和.axf文件的核心<br>.hex：​​用于烧录到单片机Flash存储器中的最终二进制文件​​，包含程序代码和数据<br>.axf：​​调试和仿真专用的可执行文件​​，包含完整的调试信息（符号表、地址映射等）</p>
+</blockquote>
+<blockquote>
+<p>为什么叫51单片机？<br>简单直接的答案是：​​因为它使用的指令集架构叫做“Intel MCS-51”，所以简称“51单片机”。​<br>​​“51单片机”​​ 得名于英特尔经典的 ​​MCS-51​​ 微控制器系列，特指所有使用​​8051兼容内核​​的微控制器。<br>它是一个​​技术架构的代名词​​，而非某个特定型号的芯片。<br>由于其​​结构经典、生态完善、成本低廉​​，至今仍在嵌入式领域占据重要地位，是初学者入门嵌入式系统的绝佳选择之一。</p>
+</blockquote>
+<h3 id="单片机及开发板介绍"><a href="#单片机及开发板介绍" class="headerlink" title="单片机及开发板介绍"></a>单片机及开发板介绍</h3><p>所见即所得，各模块简单介绍<br><img src="/imgs/2025101905.jpg"><br>（顺序：从右上角灯组开始顺时针介绍）</p>
+<blockquote>
+<p>LED灯组<br>矩阵按键<br>红外接收头<br>AT下载<br>无线模块<br>独立按键<br>USB转TTL模块：TTL（Transistor-Transistor Logic：晶体管-晶体管逻辑电平）信号系统<br>DS1302：时钟芯片，应用：时钟、闹钟、定时控制等等<br>复位：<br>AD&#x2F;DA：模数&#x2F;数模转换模块，光敏电阻、电位器、热敏电阻、外接接口等<br>74H595：控制扩展IO接口<br>步进电机<br>分频器：蜂鸣器<br>138译码器：驱动数码管<br>24C02：一种ROM，E²PROM：FlashRom比E²更好，但是这款的Flaash只能存储程序，其他一些掉电需保存的数据，便存储到54C02中<br>DS18b20：实时检测温度<br>74HC245：驱动数码管，旧版新版，驱动数码管的芯片不一样，功能几乎没差别<br>电位器：调节液晶屏的对比度、清晰度<br>排座：插液晶屏<br>点阵屏：每个孔都有一个LED灯，8*8</p>
+</blockquote>
+<p>命名规则<br><img src="/imgs/2025101902.jpg"></p>
+<p>简易block图<br><img src="/imgs/2025101901.jpg"><br>STC芯片管脚图<br><img src="/imgs/2025101903.jpg"><br>STC芯片内部结构图<br><img src="/imgs/2025101904.jpg"><br>开发板原理图<br><img src="/imgs/2025101906.jpg"></p>
+<h2 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h2><h3 id="点亮一个LED"><a href="#点亮一个LED" class="headerlink" title="点亮一个LED"></a>点亮一个LED</h3><p>LED元器件介绍<br>电阻的元器件标注规则：102&#x3D;1K<br>10 00</p>
+<p>串联电阻是为了给LED限制电流，防止LED损坏</p>
+<p>C51数据类型，联系C语言数据类型</p>
+<h3 id="独立按键"><a href="#独立按键" class="headerlink" title="独立按键"></a>独立按键</h3><p>按键的抖动、按键的消抖：1、硬件加电路 2、软件过滤</p>
+<h3 id="数码管"><a href="#数码管" class="headerlink" title="数码管"></a>数码管</h3><p>数码管介绍<br>数码管引脚定义：共阴极&#x2F;共阳极连接<br>静态&#x2F;动态数码管显示，动态数码管显示利用了人眼的视觉暂留和数码管余晖原理，动态扫描实现“同时显示几位数字”的功能</p>
+<p>芯片的“使能”控制端口<br>38译码器原理介绍，输出某位低电平或高电平<br>74HC245：DIR的LE接高电平，就从写数据（A-&gt;B），如果接低电平，就反过来，读数据（B-&gt;A）。LE与VCC间，可以通过一个键帽连接，键帽插上的时候，就是LE与VCC相连（接了高电平）。</p>
+<blockquote>
+<p>问题：单片机中，为什么低电平驱动能力强,高电平驱动能力弱?（腾讯元宝调动ds回答）<br>低电平驱动（灌电流）能力强，而高电平驱动（拉电流）能力弱​​。根本原因：根本原因在于单片机I&#x2F;O引脚输出级的典型电路设计。它通常由一个“上拉”PMOS管和一个“下拉”NMOS管组成，构成所谓的“推挽输出”或“图腾柱输出”结构。​​PMOS管通常导通电阻大，	NMOS管通常导通电阻小。</p>
+</blockquote>
+<p>与VCC相接的元器件（在电路图中是两条横线）是电容。104 &#x3D; 10 0000pF</p>
+<blockquote>
+<p>什么是电容？<br>电容是容纳电荷的元器件,由两个相互靠近的导体和中间绝缘介质构成。作用包括存储电能、滤波、耦合信号、定时、谐振等。<br>电容描述的是器件储存电荷的能力。电容的定义是器件的电荷量与电势之比，常用C表示。电容的量纲是L-2M-1T4I2，国际单位制下单位是F（法拉）。</p>
+</blockquote>
+<p>由于引脚冲突，点亮数码管的同时，之前的8个LED也有可能亮，此处忽略。</p>
+<p>为什么会产生影？<br>原因：位选 段选 位选 段选 位选 段选 位选 段选 ……<br>因为单片机执行代码速度很快，位选和段选会串</p>
+<p>数码管的消影如何完成？<br>在两个代码之间添加清零操作</p>
+<p>数码管驱动方式：单片机直接扫描、专用驱动芯片<br>直接扫描：硬件设备简单，但是会浪费大量的CPU时间，一旦CPU在此期间有做其他任务未扫描，数码管显示就可能会闪烁。<br>专用芯片：如TM1640、74HC595</p>
+<h3 id="模块化编程"><a href="#模块化编程" class="headerlink" title="模块化编程"></a>模块化编程</h3><p>.c、.h文件的使用<br>.h文件的编写方法<br>预编译，宏</p>
+<h3 id="LCD1602调试工具"><a href="#LCD1602调试工具" class="headerlink" title="LCD1602调试工具"></a>LCD1602调试工具</h3><p>有哪些调试工具？<br>数码管：需要不断刷新，显示内容少<br>串口：需要连接电脑，通过电脑显示内容<br>LCD1602显示屏：注意，使用该屏幕后，由于引脚冲突，8位的LED和数码管会乱码</p>
+<h3 id="矩阵键盘"><a href="#矩阵键盘" class="headerlink" title="矩阵键盘"></a>矩阵键盘</h3><p>矩阵键盘介绍：为了减少I&#x2F;O口占用，通常将按键排列成矩阵形式</p>
+<p>扫描的概念<br>输出扫描</p>
+<p>输入扫描</p>
+<p>其实显示器原理是也是扫描实现的。</p>
+<p>由于引脚冲突，P15与步进电机、蜂鸣器相连，所以在扫描矩阵按键时，如果该引线的按键按下，步进电机（如果连接了的话）和蜂鸣器可能会工作，此处忽略。<br>这里为了避免这个现象频繁发生，采用逐列扫描，因为P15线在行上。 </p>
+<p>弱上拉，强下压</p>
+<p>矩阵键盘在逐行扫描时会遇到一些问题，该问题不是由于扫描方式本身导致的，而是由于单片机电路设计导致的。</p>
+<blockquote>
+<p>STC89C52单片机中，在编写代码读取某个引脚的时候，实际发生的物理过程是什么样的？<br>腾讯元宝回答：总结：STC89C52读取引脚的物理过程<br>​​软件准备​​：代码必须先向端口锁存器写入 1，以关闭强下拉MOSFET。<br>​​CPU发起读取​​：执行读取端口的汇编指令。<br>​​硬件“准备”引脚​​：内部硬件产生一个短暂的负脉冲，尝试将引脚拉低，以测试外部电路的驱动能力。<br>​​电平判定​​：<br>外部为强低电平 -&gt; 引脚电压被成功拉低 -&gt; 判定为 0。<br>外部为高电平或悬空 -&gt; 弱上拉电阻将电压恢复为高 -&gt; 判定为 1。<br>​​数据锁存与返回​​：最终的电平被采样、锁存，并返回给CPU。<br>简而言之，STC89C52读取引脚不是一个被动的“检测电压”过程，而是一个包含短暂“主动测试”的交互过程。理解这一点对于正确使用 8051 系列单片机至关重要。</p>
+</blockquote>
+<blockquote>
+<p>无源蜂鸣器和有源蜂鸣器的区别<br>无源蜂鸣器需外部驱动电路支持，而有源蜂鸣器内置振荡源；前者通过调节PWM信号可实现更丰富的音效，后者仅能发出固定频率声音。</p>
+</blockquote>
+<blockquote>
+<p>由于矩阵键盘控制行的引脚中有P15，在按行扫描时，会给到P15有时高电平有时低电平，由于P15与蜂鸣器相连，且单片机上的蜂鸣器是无源蜂鸣器，所以在逐行扫描时，会导致蜂鸣器工作。</p>
+</blockquote>
+<p>单片机引脚的工作原理，VCC-电阻-开关-引脚-GND，引脚和GND之间接上连接线，连接到施密特读取器，可读取电平高低信息。</p>
+<p>弱上拉模式<br>推广输入<br>高阻输入<br>开漏输出</p>
+<h3 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h3><p>Delay函数，作用就是让CPU等待，在等待期间无法完成其他任务。</p>
+<blockquote>
+<p>51单片机的计时器属于单片机的内部资源，其电路的连接和运转均在单片机内部完成<br>定时器的作用：<br>1.用于计时系统，可实现软件计时，或者使程序每隔一固定时间完成一项操作<br>2.替代代码中长时间的Delay，提高CPU的运行效率和处理速度<br>（例：如果按原来的代码，如果在delay期间按按键，CPU检测不到）<br>3.其它：操作系统实行多任务等等……</p>
+</blockquote>
+<p>定时器个数：3个（T0、T1、T2），T0和T1与传统的51单片机兼容，T2是此型号单片机增加的资源</p>
+<p>注意：定时器的资源和单片机的型号是关联在一起的，不同的型号可能会有不同的定时器个数和操作方式，但一般来说，T0和T1的操作方式是所有51单片机所共有的</p>
+<p>51单片机定时器工作模式，最常用的是模式：16位定时器</p>
+<p>内部原理图：<br>时钟-&gt;计数器-&gt;中断系统</p>
+<p>时钟：提供计数单元的时钟脉冲<br>计数器：时钟计数<br>中断系统：产生中断，执行定时任务</p>
+<p>定时器时钟<br>有内部来源和外部来源（T0Pin&#x2F;T1Pin）</p>
+<p>分频</p>
+<p>功能选择：计数器（C）&#x2F;计数器（T）</p>
+<p>中断系统<br>高低级终端系统，中断嵌套<br>中断流程</p>
+<p>STC89C52中断资源</p>
+<p>定时器相关寄存器</p>
+<p>中断寄存器</p>
+<h3 id="串口"><a href="#串口" class="headerlink" title="串口"></a>串口</h3><blockquote>
+<p>串口的定义：串行通信接口或串行通讯接口（通常指COM接口），是采用串行通信方式的扩展接口。<br>常见的通信接口比较</p>
+</blockquote>
+<p>51单片机的UART</p>
+<p>串口参数及时序图</p>
+<p>串口模式图</p>
+<p>SBUF（Serial Data Buffer）是单片机中用于串行通信的缓冲寄存器。<br>在异步串口通信中，SBUF作为数据传输枢纽，支持CPU与外部设备间的双向通信。 ‌</p>
+<p>串口相关寄存器</p>
+<p>串口与中断系统</p>
+<p>串口操作中配置计时器<br>之前的项目使用的是16位模式，但是因为16位模式中，重置计时器需要执行两条语句，会影响计时精度，在串口传输数据的过程中，精度比较重要，所以需要重新配置计时器的模式。<br>自动重装模式：自动重装模式是定时器在溢出后自动将预设的初值重新装载到计数寄存器中的工作方式，主要用于维持定时器持续运行。</p>
+<p>一个函数不能既在主函数中和中断函数中出现，不然会导致函数重入，主函数中的该函数过程可能会遭到破坏。</p>
+<p>如何计算波特率？<br>查看操作手册，计算溢出率，然后根据计时器原理图，计算出实际波特率。</p>
+<p>数据显示模式<br>HEX&#x2F;十六进制&#x2F;二进制<br>文本模式&#x2F;字符模式：以原始数据编码后的形式显示（ASCII表转换）</p>
+<h3 id="LED点阵屏"><a href="#LED点阵屏" class="headerlink" title="LED点阵屏"></a>LED点阵屏</h3><p>一般点阵屏像素点数量为8的倍数。</p>
+<p>显示原理<br>与数码管类似</p>
+<p>74H595<br>74H595是串行输入并行输出的移位寄存器，可以用3根线输入串行数据，8根线输出并行数据。多片级联后，可输出16位、24位、32位等，常用于IO口扩展。<br>串行与并行的区别<br>SER<br>SERCLK：上升沿移位<br>RCLK：上升沿锁存</p>
+<p>74H595芯片与138译码器的区别：138只能控制一位有高&#x2F;低电平</p>
+<p>问题：单片机的IO口能不能直接接到LED点阵的引脚上？<br>答：不太可行。<br>因为单片机的IO口是弱上拉，当输出高电平是电流较小，可能会影响LED点阵的功能。<br>如果要接，可以考虑接PNP&#x2F;NPN三极管，相当于一个中继器。</p>
+<p>而且74H595是恒压输出，同样的电压点亮1个灯和8个灯，亮度区别肯定比较大。这就是示例中LED点阵灯的亮度不一样亮的原因。如果想要保证灯的亮度均匀，可考虑使用恒流芯片。（电流恒定）</p>
+<p>sfr与sbit的作用<br>sfr：special function register<br>sbit：special bit</p>
+<p>可位寻址&#x2F;不可位寻址</p>
+<p>语法如下：<br>注意：这里的^含义并不是按位亦或，而是该语句使用的语法<br>sbit 位名 &#x3D; 寄存器^位位置;<br>sbit 位名 &#x3D; 地址^位位置;<br>sbit 位名 &#x3D; 直接地址;</p>
+<p>定义数组时，默认数组存储在RAM中，如果要存放比较多的数据，可以在数组定义前增加”code”，这样定义的数组就会被存储在Flash存储中，Flash的存储空间更大。<br>将数组放在Flash中有个缺点，就是在程序运行的过程中不能更改，如果放在RAM中则可以更改。</p>
+<p>DS1302芯片、DS3221<br>单片机本身也可以计时，为什么要单独地使用一块时钟芯片？<br>1.单片机时钟精度不高<br>2.单片机会占用CPU<br>3.单片机时钟不能断电，专门的时钟芯片内置电池，断电时会自动切换时钟电源。</p>
+<p>RTC（Real Time Clock）实时时钟，是一种集成电路，通常称为时钟芯片。</p>
+<p>涓细电流充电能力指设备在电池充满后，通过极低电流（通常为0.1W左右）持续为电池补电，维持电池处于满电状态的技术。 ‌<br>3个部分：电源、晶振、控制</p>
+<p>在通讯协议中，时序图很常见</p>
+<p>不同通讯协议的特点</p>
+<p>BCD码：用4位二进制数来表示1位十进制数</p>
+<p>逻辑取反（!）与按位取反（~）的区别，注意区分！</p>
+<h3 id="蜂鸣器介绍"><a href="#蜂鸣器介绍" class="headerlink" title="蜂鸣器介绍"></a>蜂鸣器介绍</h3><p>蜂鸣器是一种将电信号转换为声音信号的器件，常用来产生设备的按键音、报警音等提示信号<br>蜂鸣器按驱动方式可分为有源蜂鸣器和无源蜂鸣器<br>有源蜂鸣器：内部自带振荡源，将正负极接上直流电压即可持续发声，频率固定<br>无源蜂鸣器：内部不带振荡源，需要控制器提供振荡脉冲才可发声，调整提供振荡脉冲的频率，可发出不同频率的声音</p>
+<p>ULN2003驱动芯片<br>单片机不能直接驱动蜂鸣器，通过与驱动芯片连接达到驱动蜂鸣器的目的。</p>
+<p>乐理部分<br>谱号、调号和拍号<br>如果某个音符有#，该小节的该音符同样#（但在谱上不再标出）<br>C大调和D大调的区别</p>
+<h3 id="AT24C02"><a href="#AT24C02" class="headerlink" title="AT24C02"></a>AT24C02</h3><p>引脚及其应用电路</p>
+<p>内部结构框图</p>
+<p>I2C总线介绍</p>
+<blockquote>
+<p>IIC（Inter-Integrated Circuit）全称集成电路总线，由飞利浦公司于1980年代为连接主板、嵌入式系统及手机的低速周边设备而开发，采用双线制串行通信架构，包含串行数据线（SDA）和串行时钟线（SCL）。</p>
+</blockquote>
+<p>I2C电路规范</p>
+<p>在编程时，注意代码结构，需要低耦合。<br>所以在本节第二个例子的实现过程中，单独编写了循环函数（或者说驱动函数），然后把此类函数放到中断函数中，实现调用，而不是直接将函数写到中断函数中。</p>
+<p>之前实现按键的功能（检测、消抖等），是通过CPU等待来实现的，当此类需要检测的函数多了之后，这个方案便需要优化。</p>
+<p>使用定时器来检测按键按下&#x2F;恢复，设置间隔为20ms后，不管开始检测时时间点在哪个位置，只要检测电位的变化，然后根据变化就可以看出是按下&#x2F;按住&#x2F;恢复</p>
+<h3 id="DS18B20温度传感器"><a href="#DS18B20温度传感器" class="headerlink" title="DS18B20温度传感器"></a>DS18B20温度传感器</h3><p>寄生供电</p>
+<h3 id="直流电机介绍"><a href="#直流电机介绍" class="headerlink" title="直流电机介绍"></a>直流电机介绍</h3><p>直流电机<br>步进电机<br>舵机<br>无刷电机<br>空心杯电机</p>
+<p>惯性系统 PWM脉冲宽度调制</p>
+<p>许多新的单片机用硬件来实现PWM功能</p>
+<h3 id="AD-DA，模数-数模转换"><a href="#AD-DA，模数-数模转换" class="headerlink" title="AD&#x2F;DA，模数&#x2F;数模转换"></a>AD&#x2F;DA，模数&#x2F;数模转换</h3><h3 id="红外遥控简介"><a href="#红外遥控简介" class="headerlink" title="红外遥控简介"></a>红外遥控简介</h3><p>NEC标准</p>
+
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by KeplerXXIIb, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/CS/" class="tag">#CS</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        
+        <a href="/2025/12/26/SomethingRecent1/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">最近的一些事</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/2025/09/23/SomethingRecent/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">最近的一些事</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Blog</h2>
+                
+                <a href="/" class="item">Blog</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+                <a href="/search" class="item">Search</a>
+                
+                <a href="/friends" class="item">Friends</a>
+                
+                <a href="/projects" class="item">Projects</a>
+                
+                <a href="/resume" class="item">Resume</a>
+                
+                <a href="/about" class="item">About</a>
+                
+                <a href="/atom.xml" class="item">RSS</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Projects</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/KeplerXXIIb/CS-Learning" class="item">C-Learning</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/KeplerXXIIb" class="item">GitHub</a>
+                
+                <a href="QQ:936474910@qq.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2026 KeplerXXIIb<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

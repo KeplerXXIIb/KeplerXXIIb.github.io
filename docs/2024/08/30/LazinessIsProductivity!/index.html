@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>懒惰也是种生产力！记对PowerShell脚本的初体验 - KeplerXXIIb</title>
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="懒惰也是种生产力！记对PowerShell脚本的初体验 - KeplerXXIIb" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="http://example.com/2024/08/30/LazinessIsProductivity!/index.html" />
+  
+  <meta property="og:image" content="/imgs/20240831001.png" />
+  
+  <meta property="og:article:published_time" content="2024-08-30T00:00:00.000Z" />
+  
+  <meta property="og:article:author" content="KeplerXXIIb" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="2"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Blog</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" href="/friends">Friends</a>
+            
+            
+            
+            <a class="nav-item" href="/projects">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/KeplerXXIIb" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-codepen nav-item-icon" href="/codepan" target="_blank" aria-label="CodePen">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-patreon nav-item-icon" href="/patreon" target="_blank" aria-label="Patreon">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-mastodon nav-item-icon" href="/mastodon" target="_blank" aria-label="Mastodon">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="/discord" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/tech-blog/">tech-blog</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>August</span>
+            <span>30,</span>
+            <span>2024</span>
+        </div>
+        
+
+        <h1 class="title">懒惰也是种生产力！记对PowerShell脚本的初体验</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <h2 id="简述：懒惰引发的Idea"><a href="#简述：懒惰引发的Idea" class="headerlink" title="简述：懒惰引发的Idea"></a>简述：懒惰引发的Idea</h2><p>最近在恶补计算机专业四大件，每次学习当天我都会git上传我本地的学习文件。然后我觉得每次输入”git status”,”git add .”…很麻烦，上一份工作时接触过一些工作流程自动化软件，譬如影刀，给我留下了挺深刻的印象：简单、重复的工作，让计算机来做！由于接触过一些简单的脚本代码（.bat），加上最近对计算机的了解愈来愈深入，我心里对自己用代码实现这个事还是有底的，说干就干，直接打开文心一言搜索相关方案！（狗头）我是windows系统，最后选择了PowerShell脚本。<br><img src="/imgs/20240831001.png"></p>
+<h2 id="PowerShell初体验：自动帮我写git"><a href="#PowerShell初体验：自动帮我写git" class="headerlink" title="PowerShell初体验：自动帮我写git"></a>PowerShell初体验：自动帮我写git</h2><p><img src="/imgs/20240626004.png"><br>因为每天不一定有文件更新（有可能更新一次文件，要学两天），所以我的想法是将其做成会话，让我自由选择是否进行git语句。<br>最终代码放后面了<br><a href="####GitInstructs.ps1">GitInstructs.ps1</a></p>
+<h2 id="PowerShell再探：pdf转jpg-OCR文字识别"><a href="#PowerShell再探：pdf转jpg-OCR文字识别" class="headerlink" title="PowerShell再探：pdf转jpg + OCR文字识别"></a>PowerShell再探：pdf转jpg + OCR文字识别</h2><p>此外呢，我每次听完网课就用语雀来记录。<br>刚开始我是自己手打笔记的，但发现用来回顾的效果不太好，主要是因为自己总结的远没有课程作者总结得精辟，而且还浪费时间，后来索性改为：直接把课件（主要为pdf）导出图片，手输大小标题然后上传到语雀。<br>刚开始吧工作量也不大，手输也还能接受，可越到后面课程越多，越发耗费时间。由于刚用powershell实现了上述所说的git交互脚本，内心跃跃欲试。于是乎又开始百度，哦不，文心一言了（狗头。<br>版本的演化过程如下，期间经历了很多“发现bug-寻找解决办法-代码优化”的痛苦循环哈哈</p>
+<h2 id="PowerShell-script的版本演化"><a href="#PowerShell-script的版本演化" class="headerlink" title="PowerShell script的版本演化"></a>PowerShell script的版本演化</h2><p>Script_V1：<br>利用Ghostscript将指定文件夹中的pdf文件导出为图片（每页pdf导出一页图片）。<br>用了几天后我觉得pdf的标题和pdf文件名差不多，可以直接将文件名汇总一下，这样我复制到语雀上的时候就很方便，所以在又加了点功能：</p>
+<p>Script_V2：</p>
+<ol>
+<li>利用Ghostscript将指定文件夹中的pdf文件导出为图片（每页pdf导出一页图片）</li>
+<li>将指定文件夹中的pdf文件名汇总导出到txt中</li>
+</ol>
+<p>又用了几天，我觉得自己手输小标题也很麻烦，所以在想能不能直接脚本搞出来。<br>在观察了哈工大计网的ppt后，我发现其用的都是同一个模板，小标题都集中到图片的上方，所以决定利用图片裁剪工具+图片OCR工具来完成这个功能。</p>
+<p>Script_V3：</p>
+<ol>
+<li>利用Ghostscript将指定文件夹中的pdf文件导出为图片（每页pdf导出一页图片）</li>
+<li>将指定文件夹中的pdf文件名汇总导出到txt中</li>
+<li>将图片复制到暂存文件夹中，用ImageMagick裁剪暂存文件夹中的图片</li>
+<li>用Tesserart OCR进行文本识别，并将文本导出到txt中</li>
+<li><blockquote>
+<p>有很多想吐槽的，害</p>
+<ol>
+<li>有关Tesserart OCR<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="variable">$cmd</span> = <span class="string">&quot;&amp; `&quot;<span class="variable">$tesseractPath</span>`&quot; `&quot;<span class="variable">$inputFile</span>`&quot; `&quot;<span class="variable">$outputFile1</span>`&quot; -l chi_sim&quot;</span></span><br></pre></td></tr></table></figure>
+这里的outputFile1我以为输出的文件要事先规定好是txt，没想到它默认导出会变成txt，不需要事先指定，所以执行语句前赋值为你需要的txt文件名称就好（不含”.txt”）。<br>我也没看用户手册哈哈，只是觉得有点和前面的语句不搭而已（前面的要指定含后缀的文件名）。</li>
+<li>还是有关Tesserart OCR<br>尽管人眼看起来这图中的字很清晰，但是这个插件的简体中文识别硬没识别出来。没办法，只能去调图片背景颜色和对比度。调完后识别的精准度上来了，不过依然难顶…<br>嗐！能用就行！<br><img src="/imgs/20240831005.png" alt="图片调整前"><br><img src="/imgs/20240831006.png" alt="图片调整后"><br><img src="/imgs/20240831008.png" alt="文字识别出来的鬼东西"><br><img src="/imgs/20240831007.png" alt="这里是想表现OCR很拉跨的节目效果哈哈原文是繁体而且图片中字很小"></li>
+</ol>
+</blockquote>
+</li>
+</ol>
+<p>目前版本如下：截止到2024&#x2F;08&#x2F;31<br><a href="####pdf2pic-Transfer.ps1">pdf2pic-Transfer.ps1</a></p>
+<p>代码框架都是从文心一言搜索出来的哈哈哈，不断调试改了些参数加了些语句。<br>写着写着突然觉得自己写代码还有很多很多很多很多的进步空间，比如备注下啥时候做了啥更改，害，其实这应该算是基本素养叭哈哈，下次一定！</p>
+<h4 id="GitInstructs-ps1"><a href="#GitInstructs-ps1" class="headerlink" title="GitInstructs.ps1"></a>GitInstructs.ps1</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># PowerShell 脚本，直接执行 Git 命令  </span></span><br><span class="line"><span class="comment"># 切换到你的 Git 仓库目录（这里需要替换为你的实际路径）  </span></span><br><span class="line"><span class="built_in">Set-Location</span> <span class="string">&quot;D:\CS\CS-Learning&quot;</span>  </span><br><span class="line"><span class="comment"># 执行 git status 并显示结果  </span></span><br><span class="line">git status  </span><br><span class="line"><span class="variable">$continue</span> = <span class="built_in">Read-Host</span> <span class="string">&quot;execute [git add]?(y/n)&quot;</span>  </span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$continue</span>.ToLower() <span class="operator">-eq</span> <span class="string">&quot;y&quot;</span>) &#123;  </span><br><span class="line">    <span class="comment"># 执行 git add .  </span></span><br><span class="line">    git add .  </span><br><span class="line">    <span class="variable">$continue</span> = <span class="built_in">Read-Host</span> <span class="string">&quot;execute [git commit]?(y/n)&quot;</span>  </span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$continue</span>.ToLower() <span class="operator">-eq</span> <span class="string">&quot;y&quot;</span>) &#123;  </span><br><span class="line">        <span class="comment"># 执行 git commit  </span></span><br><span class="line">        <span class="built_in">Write-Host</span> <span class="string">&quot;N times commit today? Input N:&quot;</span>  </span><br><span class="line">        <span class="variable">$count</span> = <span class="built_in">Read-Host</span></span><br><span class="line">        <span class="variable">$date</span> = <span class="built_in">Get-Date</span> <span class="literal">-Format</span> <span class="string">&quot;yyyy-MM-dd&quot;</span></span><br><span class="line">        <span class="variable">$commitMessage</span> = <span class="string">&quot;<span class="variable">$date</span> update<span class="variable">$count</span> by PowerShellScript&quot;</span>  </span><br><span class="line">        git commit <span class="literal">-m</span> <span class="variable">$commitMessage</span>  </span><br><span class="line">        <span class="variable">$continue</span> = <span class="built_in">Read-Host</span> <span class="string">&quot;execute [git push]?(y/n)&quot;</span>  </span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$continue</span>.ToLower() <span class="operator">-eq</span> <span class="string">&quot;y&quot;</span>) &#123;  </span><br><span class="line">            <span class="comment"># 执行 git push  </span></span><br><span class="line">            git push csl main  </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="pdf2pic-Transfer-ps1"><a href="#pdf2pic-Transfer-ps1" class="headerlink" title="pdf2pic-Transfer.ps1"></a>pdf2pic-Transfer.ps1</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置Ghostscript的安装路径  </span></span><br><span class="line"><span class="variable">$ghostscriptPath</span> = <span class="string">&quot;D:\Program Files\gs\gs10.03.1\bin\gswin64c.exe&quot;</span>  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置源PDF文件夹和目标图片文件夹  </span></span><br><span class="line"><span class="variable">$sourceFolder</span> = <span class="string">&quot;D:\CS\CS-Learning\ComputerNetwork-HIT-LQL\01Courseware&quot;</span>  </span><br><span class="line"><span class="variable">$targetFolder</span> = <span class="string">&quot;D:\CS\CS-Learning\ComputerNetwork-HIT-LQL\01Courseware\temp&quot;</span>  </span><br><span class="line"><span class="variable">$pTempFolder</span> = <span class="built_in">Join-Path</span> <span class="variable">$targetFolder</span> <span class="string">&quot;p-temp&quot;</span>  </span><br><span class="line"></span><br><span class="line"><span class="variable">$pdfFileNames</span> = <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 确保目标文件夹和p-temp文件夹存在 </span></span><br><span class="line"><span class="keyword">if</span> (<span class="operator">-not</span> (<span class="built_in">Test-Path</span> <span class="literal">-Path</span> <span class="variable">$targetFolder</span>)) &#123;  </span><br><span class="line">    <span class="built_in">New-Item</span> <span class="literal">-ItemType</span> Directory <span class="literal">-Path</span> <span class="variable">$targetFolder</span> | <span class="built_in">Out-Null</span>  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="keyword">if</span> (<span class="operator">-not</span> (<span class="built_in">Test-Path</span> <span class="literal">-Path</span> <span class="variable">$pTempFolder</span>)) &#123;  </span><br><span class="line">    <span class="built_in">New-Item</span> <span class="literal">-ItemType</span> Directory <span class="literal">-Path</span> <span class="variable">$pTempFolder</span> | <span class="built_in">Out-Null</span>  </span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="comment"># # 获取今天的开始时间（午夜）和结束时间（午夜前一秒）  </span></span><br><span class="line"><span class="comment"># $todayStart = Get-Date -Year $env:YEAR -Month $env:MONTH -Day $env:DAY -Hour 0 -Minute 0 -Second 0  </span></span><br><span class="line"><span class="comment"># $todayEnd = $todayStart.AddDays(1).AddSeconds(-1)  </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取今天的开始时间和结束时间  </span></span><br><span class="line"><span class="variable">$today</span> = <span class="built_in">Get-Date</span></span><br><span class="line"><span class="variable">$todayStart</span> = <span class="variable">$today</span>.Date  <span class="comment"># 这将自动设置为当天的午夜  </span></span><br><span class="line"><span class="variable">$todayEnd</span> = <span class="variable">$today</span>.Date.AddDays(<span class="number">1</span>).AddSeconds(<span class="literal">-1</span>)</span><br><span class="line">  </span><br><span class="line"><span class="comment"># 遍历源文件夹，只选择创建日期为今天的PDF文件  </span></span><br><span class="line"><span class="built_in">Get-ChildItem</span> <span class="literal">-Path</span> <span class="variable">$sourceFolder</span> <span class="literal">-Filter</span> <span class="string">&quot;*.pdf&quot;</span> | <span class="built_in">Where-Object</span> &#123;  </span><br><span class="line">    <span class="variable">$_</span>.CreationTime <span class="operator">-ge</span> <span class="variable">$todayStart</span> <span class="operator">-and</span> <span class="variable">$_</span>.CreationTime <span class="operator">-le</span> <span class="variable">$todayEnd</span>  </span><br><span class="line">&#125; | <span class="built_in">ForEach-Object</span> &#123;  </span><br><span class="line">    <span class="variable">$pdfFile</span> = <span class="variable">$_</span>.FullName  </span><br><span class="line">    <span class="variable">$baseName</span> = [<span class="type">System.IO.Path</span>]::GetFileNameWithoutExtension(<span class="variable">$pdfFile</span>)  </span><br><span class="line">      </span><br><span class="line">    <span class="comment"># 构建Ghostscript命令  </span></span><br><span class="line">    <span class="variable">$cmd</span> = <span class="string">&quot;&amp; `&quot;<span class="variable">$ghostscriptPath</span>`&quot; -dBATCH -dNOPAUSE -sDEVICE=jpeg -dJPEGQ=10 -r300 -sOutputFile=`&quot;<span class="variable">$targetFolder</span>\<span class="variable">$baseName</span>-%d.jpg`&quot; `&quot;<span class="variable">$pdfFile</span>`&quot;&quot;</span>  </span><br><span class="line"></span><br><span class="line">    <span class="comment"># 执行命令  </span></span><br><span class="line">    <span class="built_in">Invoke-Expression</span> <span class="variable">$cmd</span>  </span><br><span class="line">      </span><br><span class="line">    <span class="comment"># 输出一些信息到控制台（可选）  </span></span><br><span class="line">    <span class="built_in">Write-Host</span> <span class="string">&quot;正在转换: <span class="variable">$pdfFile</span>&quot;</span>  </span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将PDF文件名添加到列表中（准备写入txt文件）  </span></span><br><span class="line">    <span class="variable">$pdfFileNames</span> += <span class="variable">$baseName</span> + <span class="string">&quot;`r`n&quot;</span>  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果列表不为空，则将其写入txt文件  </span></span><br><span class="line"><span class="keyword">if</span> (![<span class="built_in">string</span>]::IsNullOrEmpty(<span class="variable">$pdfFileNames</span>)) &#123;  </span><br><span class="line">    <span class="comment"># 构建txt文件的完整路径  </span></span><br><span class="line">    <span class="variable">$txtFilePath</span> = <span class="built_in">Join-Path</span> <span class="variable">$targetFolder</span> <span class="string">&quot;pdfname1_list.txt&quot;</span>  </span><br><span class="line">  </span><br><span class="line">    <span class="comment"># 将文件名列表写入txt文件  </span></span><br><span class="line">    <span class="variable">$pdfFileNames</span> | <span class="built_in">Out-File</span> <span class="literal">-FilePath</span> <span class="variable">$txtFilePath</span> <span class="literal">-Encoding</span> utf8  </span><br><span class="line">  </span><br><span class="line">    <span class="comment"># 输出信息到控制台  </span></span><br><span class="line">    <span class="built_in">Write-Host</span> <span class="string">&quot;PDF文件名已保存到: <span class="variable">$txtFilePath</span>&quot;</span>  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># #替换中文名称</span></span><br><span class="line"><span class="comment"># # 复制图片到p-temp文件夹，并删除文件名中的中文（或非ASCII字符）  </span></span><br><span class="line"><span class="comment"># Get-ChildItem -Path $targetFolder -Filter &quot;*.jpg&quot; | ForEach-Object &#123;  </span></span><br><span class="line"><span class="comment">#     $sourcePath = $_.FullName  </span></span><br><span class="line"><span class="comment">#     # 移除文件名中的非ASCII字符  </span></span><br><span class="line"><span class="comment">#     $asciiOnlyName = [System.Text.RegularExpressions.Regex]::Replace($_.Name, &quot;[^\x00-\x7F]&quot;, &quot;&quot;)  </span></span><br><span class="line"><span class="comment">#     $destinationPath = Join-Path $pTempFolder $asciiOnlyName  </span></span><br><span class="line"><span class="comment">#     Copy-Item -Path $sourcePath -Destination $destinationPath </span></span><br><span class="line"><span class="comment"># &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#不替换中文名称</span></span><br><span class="line"><span class="comment"># 复制图片到p-temp文件夹，并删除文件名中的中文（或非ASCII字符）  </span></span><br><span class="line"><span class="built_in">Get-ChildItem</span> <span class="literal">-Path</span> <span class="variable">$targetFolder</span> <span class="literal">-Filter</span> <span class="string">&quot;*.jpg&quot;</span> | <span class="built_in">ForEach-Object</span> &#123;  </span><br><span class="line">    <span class="variable">$sourcePath</span> = <span class="variable">$_</span>.FullName  </span><br><span class="line">    <span class="comment"># 移除文件名中的非ASCII字符  </span></span><br><span class="line">    <span class="variable">$asciiOnlyName</span> = <span class="variable">$_</span>.Name </span><br><span class="line">    <span class="variable">$destinationPath</span> = <span class="built_in">Join-Path</span> <span class="variable">$pTempFolder</span> <span class="variable">$asciiOnlyName</span>  </span><br><span class="line">    <span class="built_in">Copy-Item</span> <span class="literal">-Path</span> <span class="variable">$sourcePath</span> <span class="literal">-Destination</span> <span class="variable">$destinationPath</span> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">############</span></span><br><span class="line">  <span class="comment"># 裁剪p-temp中的每张图片并保存到p-temp中（不保存原版）  </span></span><br><span class="line"><span class="variable">$magickPath</span> = <span class="string">&quot;D:\Program Files\ImageMagick-7.1.1-Q16\magick.exe&quot;</span>  <span class="comment"># ImageMagick路径  </span></span><br><span class="line"><span class="variable">$tempImages</span> = <span class="built_in">Get-ChildItem</span> <span class="literal">-Path</span> <span class="variable">$pTempFolder</span> <span class="literal">-Filter</span> <span class="string">&quot;*.jpg&quot;</span>  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$img</span> <span class="keyword">in</span> <span class="variable">$tempImages</span>) &#123;  </span><br><span class="line">    <span class="variable">$sourcePath</span> = <span class="variable">$img</span>.FullName  </span><br><span class="line">  </span><br><span class="line">    <span class="comment"># 获取图片的原始尺寸  </span></span><br><span class="line">    <span class="variable">$originalSize</span> = &amp; <span class="string">&quot;<span class="variable">$magickPath</span>&quot;</span> identify <span class="literal">-format</span> <span class="string">&quot;%wx%h&quot;</span> <span class="string">&quot;<span class="variable">$sourcePath</span>&quot;</span>  </span><br><span class="line">    <span class="variable">$width</span>, <span class="variable">$height</span> = <span class="variable">$originalSize</span>.Split(<span class="string">&#x27;x&#x27;</span>)  </span><br><span class="line">    <span class="variable">$newheight1</span> = [<span class="built_in">double</span>]<span class="variable">$height</span></span><br><span class="line">    <span class="variable">$newHeight</span> = [<span class="built_in">int</span>](<span class="variable">$newheight1</span> * <span class="number">0.1186</span>)</span><br><span class="line">    <span class="comment"># $cropTop = [math]::Floor($height * 0.1186)  ;</span></span><br><span class="line">    <span class="comment"># $cropTop = [math]::Floor(($height - $newHeight) / 2)  </span></span><br><span class="line">  </span><br><span class="line">    <span class="comment"># 构建裁剪命令  </span></span><br><span class="line">    <span class="comment"># 注意：裁剪宽度应该使用原始宽度，X坐标应为0，Y坐标为$cropTop  </span></span><br><span class="line">    <span class="variable">$outputFile</span> = <span class="variable">$sourcePath</span>.Replace(<span class="string">&#x27;.jpg&#x27;</span>, <span class="string">&#x27;_cropped.jpg&#x27;</span>)  </span><br><span class="line">    <span class="variable">$cmd</span> = <span class="string">&quot;&amp; `&quot;<span class="variable">$magickPath</span>`&quot; `&quot;<span class="variable">$sourcePath</span>`&quot; -crop <span class="variable">$</span>&#123;width&#125;x<span class="variable">$</span>&#123;newHeight&#125;+0+0 `&quot;<span class="variable">$outputFile</span>`&quot;&quot;</span>  </span><br><span class="line">    <span class="comment"># 执行命令  </span></span><br><span class="line">    <span class="built_in">Invoke-Expression</span> <span class="variable">$cmd</span>  </span><br><span class="line"></span><br><span class="line">    <span class="comment"># 构造ImageMagick命令以增加对比度（这里假设对比度增加1.5倍）  </span></span><br><span class="line">    <span class="variable">$contrastCmd</span> = <span class="string">&quot;&amp; `&quot;<span class="variable">$magickPath</span>`&quot; `&quot;<span class="variable">$outputFile</span>`&quot; -level 66%,93% `&quot;<span class="variable">$outputFile</span>`&quot;&quot;</span>  </span><br><span class="line">    <span class="comment"># 执行ImageMagick命令  </span></span><br><span class="line">    <span class="built_in">Invoke-Expression</span> <span class="variable">$contrastCmd</span> </span><br><span class="line"></span><br><span class="line">    <span class="comment"># 如果需要，可以删除原始图片（这里执行删除）  </span></span><br><span class="line">    <span class="built_in">Remove-Item</span> <span class="variable">$sourcePath</span>  </span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="comment"># 调用Tesseract OCR识别p-temp文件夹中的每张图片中的文字  </span></span><br><span class="line"><span class="variable">$tesseractPath</span> = <span class="string">&quot;D:\Users\DKLi\AppData\Local\Programs\Tesseract-OCR\tesseract.exe&quot;</span>  <span class="comment"># Tesseract OCR路径  </span></span><br><span class="line"><span class="variable">$ocrResults</span> = <span class="string">&quot;&quot;</span>  </span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$img</span> <span class="keyword">in</span> <span class="built_in">Get-ChildItem</span> <span class="literal">-Path</span> <span class="variable">$pTempFolder</span> <span class="literal">-Filter</span> <span class="string">&quot;*.jpg&quot;</span>) &#123; </span><br><span class="line">    <span class="variable">$inputFile</span> = <span class="built_in">Join-Path</span> <span class="variable">$pTempFolder</span> <span class="variable">$img</span></span><br><span class="line">    <span class="variable">$baseName</span> = [<span class="type">System.IO.Path</span>]::GetFileNameWithoutExtension(<span class="variable">$img</span>.FullName)  </span><br><span class="line">    <span class="variable">$outputFile1</span> = <span class="built_in">Join-Path</span> <span class="variable">$pTempFolder</span> <span class="string">&quot;<span class="variable">$baseName</span>&quot;</span>  </span><br><span class="line">    <span class="variable">$cmd</span> = <span class="string">&quot;&amp; `&quot;<span class="variable">$tesseractPath</span>`&quot; `&quot;<span class="variable">$inputFile</span>`&quot; `&quot;<span class="variable">$outputFile1</span>`&quot; -l chi_sim&quot;</span>  <span class="comment"># 使用图片的完整路径作为输入  </span></span><br><span class="line">  </span><br><span class="line">    <span class="comment"># 执行命令  </span></span><br><span class="line">    <span class="built_in">Invoke-Expression</span> <span class="variable">$cmd</span>  </span><br><span class="line">    <span class="comment"># 读取OCR结果并添加到汇总文本中  </span></span><br><span class="line">    <span class="variable">$outputFile</span> = <span class="built_in">Join-Path</span> <span class="variable">$pTempFolder</span> <span class="string">&quot;<span class="variable">$baseName</span>.txt&quot;</span> </span><br><span class="line">    <span class="variable">$ocrText</span> = <span class="built_in">Get-Content</span> <span class="variable">$outputFile</span> <span class="literal">-Raw</span>  <span class="literal">-Encoding</span> UTF8   <span class="comment">#使用-Raw以避免换行符问题  </span></span><br><span class="line">    <span class="variable">$ocrResults</span> += <span class="variable">$ocrText</span> + <span class="string">&quot;`r`n&quot;</span>  <span class="comment"># 添加分隔符  </span></span><br><span class="line">  </span><br><span class="line">    <span class="comment"># 清理：删除临时txt文件（如果需要）  </span></span><br><span class="line">    <span class="built_in">Remove-Item</span> <span class="variable">$outputFile</span>  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 将OCR结果汇总到文件  </span></span><br><span class="line"><span class="variable">$ocrResultFilePath</span> = <span class="built_in">Join-Path</span> <span class="variable">$targetFolder</span> <span class="string">&quot;pdfname2_list.txt&quot;</span>  </span><br><span class="line"><span class="variable">$ocrResults</span> | <span class="built_in">Out-File</span> <span class="literal">-FilePath</span> <span class="variable">$ocrResultFilePath</span> <span class="literal">-Encoding</span> utf8  </span><br><span class="line"><span class="built_in">Write-Host</span> <span class="string">&quot;OCR结果已汇总到: <span class="variable">$ocrResultFilePath</span>&quot;</span>  </span><br><span class="line"></span><br><span class="line"><span class="comment">############</span></span><br><span class="line"><span class="comment"># 读取文件内容  </span></span><br><span class="line"><span class="variable">$content</span> = <span class="built_in">Get-Content</span> <span class="literal">-Path</span> <span class="variable">$ocrResultFilePath</span> </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 使用正则表达式进行查找和替换（这里不需要复杂的正则表达式，但为了展示其可能性）  </span></span><br><span class="line"><span class="variable">$updatedContent</span> = <span class="variable">$content</span> <span class="operator">-replace</span> <span class="string">&quot; &quot;</span>, <span class="string">&quot;&quot;</span>  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 将更新后的内容写回文件  </span></span><br><span class="line"><span class="variable">$updatedContent</span> | <span class="built_in">Set-Content</span> <span class="literal">-Path</span> <span class="variable">$ocrResultFilePath</span> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">Write-Output</span> <span class="string">&quot;今天创建的PDF文件转换完成&quot;</span></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by KeplerXXIIb, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/CS/" class="tag">#CS</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        
+        <a href="/2025/03/27/LearningCompilationPrinciple&amp;AssemblyLanguage/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">学习编译原理与汇编！</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/2024/06/26/SomeThoughtsAboutAI/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">今日，用AI大模型有感而发Some thoughts about AI.</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Blog</h2>
+                
+                <a href="/" class="item">Blog</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+                <a href="/search" class="item">Search</a>
+                
+                <a href="/friends" class="item">Friends</a>
+                
+                <a href="/projects" class="item">Projects</a>
+                
+                <a href="/resume" class="item">Resume</a>
+                
+                <a href="/about" class="item">About</a>
+                
+                <a href="/atom.xml" class="item">RSS</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Projects</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/KeplerXXIIb/CS-Learning" class="item">C-Learning</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/KeplerXXIIb" class="item">GitHub</a>
+                
+                <a href="QQ:936474910@qq.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2026 KeplerXXIIb<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>
